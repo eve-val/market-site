@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <script type="text/javascript" src="id_list.js"></script>
+        <script type="text/javascript">
+        (function() {
+            var polling = false;
+            var item_ids_to_poll;
+
+
+            window.poll_the_next_item = function(looping) {
+                // Protect against clicking the button more than once
+                if(polling !== looping) return;
+                if(!polling) {
+                    item_ids_to_poll = item_ids;
+
+                    var start_id = document.getElementById('start-item').value;
+                    if(start_id !== '') {
+                        start_id = parseInt(start_id);
+                        while(item_ids_to_poll.length > 0 && item_ids_to_poll[0] !== start_id) {
+                            item_ids_to_poll.shift();
+                        }
+                    }
+                    document.getElementById('start-button').innerHTML = 'Polling:';
+                    polling = true;
+                }
+
+                var current_item = document.getElementById('current-item');
+                var items_remaining = document.getElementById('items-remaining');
+                items_remaining.value = item_ids_to_poll.length.toString();
+                if(item_ids_to_poll.length == 0) {
+                    current_item.value = 'Done!';
+                    return;
+                }
+
+                var item_id = item_ids_to_poll.shift();
+                current_item.value = item_id.toString();
+                CCPEVE.showMarketDetails(item_id);
+                setTimeout(function() { poll_the_next_item(true) }, 4500);
+            };
+        })();
+        </script>
+    </head>
+    <body>
+        Start at id: <input id="start-item" value="" /> (optional)
+        <br/><br/>
+        <button id="start-button" onclick="javascript:poll_the_next_item(false);">Poll items</button>
+        <input id="current-item" disabled="true" value="" /> (<input id="items-remaining" disabled="true" value="0" /> items remaining)
+    </body>
+</hml>
+
+
