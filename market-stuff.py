@@ -73,15 +73,37 @@ def text_output(table):
         print("%s: %d at %s" % parts)
 
 def html_output(table):
+    print("<html><head><title>%s market data</title>" % SYSTEM)
+    print("""
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+ 
+<!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+ 
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $('#market').dataTable( {
+      "bPaginate": false,
+      "bLengthChange": false,
+    } );
+  } );
+</script>
+
+</head><body>""")
     print("Data may be out of date or missing. Items might be in the wrong station. Price shown is the lowest price. If you want more items on here, message sully on IRC with links to lists of items (probably pastebinned).<br>")
 
     print("<h1>%s market</h1>" % SYSTEM)
 
-    print("<table border=1>")
+    print("<table border=1 id='market'>")
+    print("<thead><tr><th>Item</th><th>quantity</th><th>price</th></tr></thead>")
+    print("<tbody>")
     for (name, count, price) in table:
         price_fmt = "{:,.2f}".format(price)
         print("<tr><td>%s</td><td>%d</td><td>%s</td></tr>" % (name, count, price_fmt))
-    print("</table>")
+    print("</tbody></table></body></html>")
 
 def make_table(formatter):
     item_names = [s.strip() for s in open(ITEM_LIST)]
