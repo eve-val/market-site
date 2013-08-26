@@ -1,26 +1,36 @@
+'Arbalest' Cruise Launcher I
+'Hypnos' Ion Field ECM I
+'Hypnos' Signal Distortion Amplifier I
+'Refuge' Adaptive Nano Plating I
+'Umbra' White Noise ECM
 10MN Afterburner II
 10MN Microwarpdrive II
 125mm Gatling AutoCannon II
+1400mm Prototype Siege Cannon
+150mm Light AutoCannon II
 150mm Railgun II
 1600mm Reinforced Rolled Tungsten Plates I
 1600mm Reinforced Steel Plates II
+200mm AutoCannon II
 200mm Railgun II
 200mm Reinforced Rolled Tungsten Plates I
 50W Infectious Power System Malfunction
 5W Infectious Power System Malfunction
 650mm Artillery Cannon II
 650mm Medium 'Scout' Artillery I
+720mm 'Scout' Artillery I 
+720mm Howitzer Artillery II
 800mm Reinforced Rolled Tungsten Plates I
 800mm Reinforced Steel Plates II
 Adaptive Invulnerability Field II
 Adaptive Nano Plating II
-'Arbalest' Cruise Launcher I
 Arbitrator
 Armageddon
 Armor Explosive Hardener II
 Armor Kinetic Hardener II
 Armor Thermic Hardener II
 Augoror
+BZ-5 Neutralizing Spatial Destabilizer ECM
 Ballistic Control System II
 Balmer Series Tracking Disruptor I
 Bellicose
@@ -29,27 +39,31 @@ Blackbird
 Bouncer I
 Bouncer II
 Brutix
-BZ-5 Neutralizing Spatial Destabilizer ECM
 Caldari Navy Antimatter Charge L
 Caldari Navy Antimatter Charge M
 Caldari Navy Antimatter Charge S
 Caldari Navy Inferno Cruise Missile
 Caldari Navy Inferno Light Missile
+Caldari Navy Inferno Torpedo
 Caldari Navy Iridium Charge S
 Caldari Navy Mjolnir Light Missile
+Caldari Navy Mjolnir Torpedo
+Caldari Navy Nova Torpedo
 Caldari Navy Scourge Heavy Assault Missile
-Capacitor Power Relay II
+Caldari Navy Scourge Torpedo
 Cap Recharger II
+Capacitor Power Relay II
 Catalyst
 Celestis
 Centii C-Type Small Energy Transfer Array
 Centum C-Type Medium Remote Armor Repair System
+Co-Processor II
 Conjunctive Ladar ECCM Scanning Array I
 Conjunctive Magnetometric ECCM Scanning Array I
 Conjunctive Radar ECCM Scanning Array I
-Co-Processor II
 Corelum C-Type Medium Remote Armor Repair System
 Cormorant
+Covert Ops Cloaking Device II
 Curator I
 Curator II
 Curse
@@ -58,8 +72,8 @@ Drake
 Drone Damage Amplifier II
 Drone Link Augmentor I
 E50 Prototype Energy Vampire
-EMP M
 EM Ward Amplifier II
+EMP M
 Energized Adaptive Nano Membrane II
 Enfeebling Phase Inversion ECM I
 Exequror
@@ -87,30 +101,33 @@ Heavy Unstable Power Fluctuator I
 Hobgoblin I
 Hobgoblin II
 Hornet EC-300
+Hound
 Huginn
-'Hypnos' Ion Field ECM I
-'Hypnos' Signal Distortion Amplifier I
 Imperial Navy Multifrequency L
 Imperial Navy Multifrequency M
+Inferno Torpedo
 Interdiction Sphere Launcher I
 Internal Force Field Array I
 J5b Phased Prototype Warp Scrambler I
+Large 'Notos' Explosive Charge I
+Large 'Regard' Power Projector
+Large 'Solace' Remote Bulwark Reconstruction
+Large 'Vehemence' Shockwave Charge
 Large Bay Loading Accelerator I
 Large F-S9 Regolith Shield Induction
 Large Hydraulic Bay Thrusters I
 Large Micro Jump Drive
-Large 'Notos' Explosive Charge I
-Large 'Regard' Power Projector
 Large S95a Partial Shield Transporter
 Large Shield Extender II
-Large 'Solace' Remote Bulwark Reconstruction
 Large Trimark Armor Pump I
-Large 'Vehemence' Shockwave Charge
 Light Neutron Blaster II
 Light Shield Maintenance Bot I
 Limited 1MN Microwarpdrive I
 Limited Adaptive Invulnerability Field I
 Magnetic Field Stabilizer II
+Manticore
+Medium 'Solace' Remote Bulwark Reconstruction
+Medium 'Vehemence' Shockwave Charge
 Medium Ancillary Current Router I
 Medium Anti-EM Screen Reinforcer I
 Medium Anti-Explosive Pump I
@@ -131,11 +148,10 @@ Medium Remote Repair Augmentor I
 Medium S95a Partial Shield Transporter
 Medium Shield Extender II
 Medium Shield Maintenance Bot I
-Medium 'Solace' Remote Bulwark Reconstruction
 Medium Trimark Armor Pump I
-Medium 'Vehemence' Shockwave Charge
 Mega Pulse Laser II
 Mjolnir Light Missile
+Mjolnir Torpedo
 Modal Electron Particle Accelerator I
 Modal Ion Particle Accelerator I
 Modal Light Electron Particle Accelerator I
@@ -146,7 +162,9 @@ Modal Neutron Particle Accelerator I
 Nanofiber Internal Structure II
 Navy Cap Booster 400
 Navy Cap Booster 800
+Nemesis
 Neutron Blaster Cannon II
+Nova Torpedo
 Null L
 Oneiros
 Optical Tracking Computer I
@@ -155,22 +173,34 @@ Optimal Range Script
 Oracle
 Phased Muon Sensor Disruptor I
 Phased Weapon Navigation Array Generation Extron
+Phased Weapon Navigation Array Generation Extron
 Pithi A-Type Small Shield Transporter
 Power Diagnostic System II
+Prototype 'Arbalest' Torpedo Launcher
 Prototype 100MN Microwarpdrive I
 Pseudoelectron Containment Field I
+Purifier
 Rapid Light Missile Launcher II
 Reactive Armor Hardener
 Reactor Control Unit I
-'Refuge' Adaptive Nano Plating I
+Republic Fleet EMP L
+Republic Fleet EMP M
 Republic Fleet EMP S
+Republic Fleet Fusion L
+Republic Fleet Fusion M
+Republic Fleet Fusion S
+Republic Fleet Phased Plasma L
+Republic Fleet Phased Plasma M
+Republic Fleet Phased Plasma S
 Republic Fleet Titanium Sabot M
 Sabre
 Scimitar
+Scourge Torpedo
 Scythe
 Sensor Booster II
 Signal Amplifier II
 Signal Distortion Amplifier II
+Small 'Vehemence' Shockwave Charge
 Small Ancillary Current Router I
 Small Anti-EM Screen Reinforcer I
 Small Anti-Explosive Pump I
@@ -183,7 +213,6 @@ Small Particle Dispersion Augmentor I
 Small Particle Dispersion Projector I
 Small Processor Overclocking Unit I
 Small Trimark Armor Pump I
-Small 'Vehemence' Shockwave Charge
 Stabber Fleet Issue
 Stasis Webifier II
 Talos
@@ -198,15 +227,14 @@ True Sansha Energized Explosive Membrane
 True Sansha Small EMP Smartbomb
 Type-D Attenuation Signal Augmentation
 Typhoon
-'Umbra' White Noise ECM
 Upgraded 'Malkuth' Rapid Light Missile Launcher
 Valkyrie I
 Valkyrie II
 Vespa EC-600
 Vigil
 Void M
-Warp Disruptor II
 Warp Disrupt Probe
+Warp Disruptor II
 Warp Scrambler II
 Warrior I
 Warrior II
