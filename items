@@ -8,12 +8,16 @@
 125mm Gatling AutoCannon II
 1400mm Prototype Siege Cannon
 150mm Light AutoCannon II
+150mm Prototype Gauss Gun
 150mm Railgun II
 1600mm Reinforced Rolled Tungsten Plates I
 1600mm Reinforced Steel Plates II
 200mm AutoCannon II
+200mm Prototype Gauss Gun
 200mm Railgun II
 200mm Reinforced Rolled Tungsten Plates I
+250mm Prototype Gauss Gun
+250mm Railgun II
 50W Infectious Power System Malfunction
 5W Infectious Power System Malfunction
 650mm Artillery Cannon II
@@ -83,9 +87,11 @@ Enfeebling Phase Inversion ECM I
 Exequror
 Experimental 10MN Afterburner I
 Experimental 10MN Microwarpdrive I
+F-90 Positional Sensor Subroutines
 Faint Epsilon Warp Scrambler I
 Fleeting Propulsion Inhibitor I
 Flycatcher
+Fourier Transform Tracking Program
 Garde I
 Garde II
 Griffin
@@ -100,6 +106,7 @@ Heat Sink II
 Heavy Assault Missile Launcher II
 Heavy Capacitor Booster II
 Heavy Electrochemical Capacitor Booster I
+Heavy Electron Blaster II
 Heavy Ion Blaster II
 Heavy Neutron Blaster II
 Heavy Pulse Laser II
@@ -119,19 +126,23 @@ Large 'Notos' Explosive Charge I
 Large 'Regard' Power Projector
 Large 'Solace' Remote Bulwark Reconstruction
 Large 'Vehemence' Shockwave Charge
+Large Anti-Explosive Pump I
 Large Bay Loading Accelerator I
 Large F-S9 Regolith Shield Induction
 Large Hydraulic Bay Thrusters I
 Large Micro Jump Drive
+Large Particle Dispersion Projector I
 Large S95a Partial Shield Transporter
 Large Shield Extender II
 Large Trimark Armor Pump I
+Light Ion Blaster II
 Light Neutron Blaster II
 Light Shield Maintenance Bot I
 Limited 1MN Microwarpdrive I
 Limited Adaptive Invulnerability Field I
 Magnetic Field Stabilizer II
 Manticore
+Medium 'Knave' Energy Drain
 Medium 'Solace' Remote Bulwark Reconstruction
 Medium 'Vehemence' Shockwave Charge
 Medium Ancillary Current Router I
@@ -141,6 +152,7 @@ Medium Anti-Kinetic Pump I
 Medium Anti-Kinetic Screen Reinforcer I
 Medium Anti-Thermal Screen Reinforcer I
 Medium Armor Maintenance Bot I
+Medium Armor Repairer II
 Medium Azeotropic Ward Salubrity I
 Medium Bay Loading Accelerator I
 Medium Capacitor Control Circuit I
@@ -149,6 +161,8 @@ Medium Egress Port Maximizer I
 Medium Electrochemical Capacitor Booster I
 Medium F-S9 Regolith Shield Induction
 Medium Particle Dispersion Augmentor I
+Medium Particle Dispersion Projector I
+Medium Polycarbon Engine Housing I
 Medium Remote Armor Repair System II
 Medium Remote Repair Augmentor I
 Medium S95a Partial Shield Transporter
@@ -183,6 +197,7 @@ Pithi A-Type Small Shield Transporter
 Power Diagnostic System II
 Prototype 'Arbalest' Torpedo Launcher
 Prototype 100MN Microwarpdrive I
+Prototype Cloaking Device I
 Pseudoelectron Containment Field I
 Purifier
 Rapid Light Missile Launcher II
@@ -200,22 +215,27 @@ Republic Fleet Phased Plasma S
 Republic Fleet Titanium Sabot M
 Sabre
 Scimitar
+Scorpion
 Scourge Torpedo
 Scythe
 Sensor Booster II
 Signal Amplifier II
 Signal Distortion Amplifier II
+Slasher
+Small 'Knave' Energy Drain
 Small 'Vehemence' Shockwave Charge
 Small Ancillary Current Router I
 Small Anti-EM Screen Reinforcer I
 Small Anti-Explosive Pump I
 Small Anti-Thermal Screen Reinforcer I
+Small Armor Repairer II
 Small Capacitor Booster II
 Small Hybrid Collision Accelerator I
 Small Hybrid Metastasis Adjuster I
 Small Ionic Field Projector I
 Small Particle Dispersion Augmentor I
 Small Particle Dispersion Projector I
+Small Polycarbon Engine Housing I
 Small Processor Overclocking Unit I
 Small Trimark Armor Pump I
 Stabber Fleet Issue
