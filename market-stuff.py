@@ -84,8 +84,28 @@ def html_output(table):
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
 <script type="text/javascript" charset="utf-8">
+
+// formatted numbers sorting from http://datatables.net/plug-ins/sorting#formatted_numbers
+jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+    "formatted-num-pre": function ( a ) {
+        a = (a === "-" || a === "") ? 0 : a.replace( /[^\d\-\.]/g, "" );
+        return parseFloat( a );
+    },
+ 
+    "formatted-num-asc": function ( a, b ) {
+        return a - b;
+    },
+ 
+    "formatted-num-desc": function ( a, b ) {
+        return b - a;
+    }
+} );
+
   $(document).ready(function() {
     $('#market').dataTable( {
+      "aoColumnDefs": [
+        { "sType": "formatted-num", "aTargets": [ 2 ] }
+      ],
       "bPaginate": false,
       "bLengthChange": false,
     } );
