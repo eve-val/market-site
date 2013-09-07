@@ -6,6 +6,7 @@
 # Something that I ran to extract module lists from copy pasted forum posts:
 # cat new-list | tr '[' '\n' | tr ',' '\n' | sed -e 's/^[ \t]*//' | sed 's/ x.$//' | sort | uniq | ./market-stuff.py --filter
 
+import email
 import sys
 import sqlite3
 import urllib.request as urlreq
@@ -93,10 +94,14 @@ def html_output(table):
 </script>
 
 </head><body>""")
-    print("Data may be out of date or missing. Items might be in the wrong station. Price shown is the lowest price. If you want more items on here, message sully on IRC with links to lists of items (probably pastebinned).<br>")
+    print("<p>Data may be out of date or missing. Items might be in the wrong station. Price shown is the lowest price. If you want more items on here, message sully on IRC with links to lists of items (probably pastebinned).")
+    print("""<p><strong>Want to help out and keep this up-to-date?
+Run the <a href="/poller">poller</a> while ship-spinning in Curse!</strong>""")
 
     print("<h1>%s market</h1>" % SYSTEM)
-
+    print("""<em>Last updated %s [EVE time], from
+<a href="http://eve-central.com">eve-central</a> data no more than 24 hours old
+at that time.</em><br>""" % email.utils.formatdate(usegmt=True))
     print("<table border=1 id='market'>")
     print("<thead><tr><th>Item</th><th>quantity</th><th>price</th></tr></thead>")
     print("<tbody>")

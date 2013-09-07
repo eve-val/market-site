@@ -41,15 +41,17 @@
         </script>
     </head>
     <body>
-	<p>
-        When run in the IGB, this will poll all of the items in our
-        item database. Run this, and also run EVEMon or some other
-        eve-central data uploader. The poller will start at a random
-        location in the item list, and run through all items, so it is
-        helpful to run this, even if you can't keep it running for the
-        whole time.
-
-	<p>
+      <ul>
+	<li>Run this in the in-game browser.  It only works there!
+	<li>Also run EVEMon, or some other program that automatically uploads to eve-central.
+	<li>Hit the "Poll items" button.
+	<li>Feel good about yourself for helping out.  Try not to be
+	annoyed by the market window popping itself to the front every
+	few seconds.
+	<li>Running this for just a few minutes helps out, since it
+	starts off at a random position in the items list.  (Of
+	course, running it to completion is even better.)
+      </ul>
         <button id="start-button" onclick="javascript:poll_the_next_item(false);">Poll items</button>
         <input id="current-item" disabled="true" value="" /> (<input id="items-remaining" disabled="true" value="0" /> items remaining)
     </body>
