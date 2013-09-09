@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # This requires a sqlite database dump from
-# http://pozniak.pl/dbdump/ody101-sqlite3-v12.db.bz2
+# http://pozniak.pl/dbdump/ody110-sqlite3-v1.db.bz2
 
 # Something that I ran to extract module lists from copy pasted forum posts:
 # cat new-list | tr '[' '\n' | tr ',' '\n' | sed -e 's/^[ \t]*//' | sed 's/ x.$//' | sort | uniq | ./market-stuff.py --filter
@@ -19,7 +19,7 @@ ITEM_LIST = 'items'
 name2id = {}
 id2name = {}
 
-conn = sqlite3.connect('ody101-sqlite3-v12.db')
+conn = sqlite3.connect('ody110-sqlite3-v1.db')
 
 def get_system_id(name):
     c = conn.cursor()
@@ -78,10 +78,10 @@ def html_output(table):
     print("""
 <!-- DataTables CSS -->
 <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
- 
+
 <!-- jQuery -->
 <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
- 
+
 <!-- DataTables -->
 <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
 <script type="text/javascript" charset="utf-8">
@@ -92,11 +92,11 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
         a = (a === "-" || a === "") ? 0 : a.replace( /[^\d\-\.]/g, "" );
         return parseFloat( a );
     },
- 
+
     "formatted-num-asc": function ( a, b ) {
         return a - b;
     },
- 
+
     "formatted-num-desc": function ( a, b ) {
         return b - a;
     }

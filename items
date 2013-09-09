@@ -63,13 +63,13 @@ Cap Recharger II
 Capacitor Power Relay II
 Catalyst
 Celestis
-Centii C-Type Small Energy Transfer Array
-Centum C-Type Medium Remote Armor Repair System
+Centii C-Type Small Remote Capacitor Transmitter
+Centum C-Type Medium Remote Armor Repairer
 Co-Processor II
 Conjunctive Ladar ECCM Scanning Array I
 Conjunctive Magnetometric ECCM Scanning Array I
 Conjunctive Radar ECCM Scanning Array I
-Corelum C-Type Medium Remote Armor Repair System
+Corelum C-Type Medium Remote Armor Repairer
 Cormorant
 Covert Ops Cloaking Device II
 Curator I
@@ -123,8 +123,8 @@ Interdiction Sphere Launcher I
 Internal Force Field Array I
 J5b Phased Prototype Warp Scrambler I
 Large 'Notos' Explosive Charge I
-Large 'Regard' Power Projector
-Large 'Solace' Remote Bulwark Reconstruction
+Large 'Regard' Remote Capacitor Transmitter
+Large 'Solace' Remote Armor Repairer
 Large 'Vehemence' Shockwave Charge
 Large Anti-Explosive Pump I
 Large Bay Loading Accelerator I
@@ -132,7 +132,7 @@ Large F-S9 Regolith Shield Induction
 Large Hydraulic Bay Thrusters I
 Large Micro Jump Drive
 Large Particle Dispersion Projector I
-Large S95a Partial Shield Transporter
+Large S95a Remote Shield Booster
 Large Shield Extender II
 Large Trimark Armor Pump I
 Light Ion Blaster II
@@ -143,7 +143,7 @@ Limited Adaptive Invulnerability Field I
 Magnetic Field Stabilizer II
 Manticore
 Medium 'Knave' Energy Drain
-Medium 'Solace' Remote Bulwark Reconstruction
+Medium 'Solace' Remote Armor Repairer
 Medium 'Vehemence' Shockwave Charge
 Medium Ancillary Current Router I
 Medium Anti-EM Screen Reinforcer I
@@ -163,9 +163,9 @@ Medium F-S9 Regolith Shield Induction
 Medium Particle Dispersion Augmentor I
 Medium Particle Dispersion Projector I
 Medium Polycarbon Engine Housing I
-Medium Remote Armor Repair System II
+Medium Remote Armor Repairer II
 Medium Remote Repair Augmentor I
-Medium S95a Partial Shield Transporter
+Medium S95a Remote Shield Booster
 Medium Shield Extender II
 Medium Shield Maintenance Bot I
 Medium Trimark Armor Pump I
@@ -193,7 +193,7 @@ Optimal Range Script
 Oracle
 Phased Muon Sensor Disruptor I
 Phased Weapon Navigation Array Generation Extron
-Pithi A-Type Small Shield Transporter
+Pithi A-Type Small Remote Shield Booster
 Power Diagnostic System II
 Prototype 'Arbalest' Torpedo Launcher
 Prototype 100MN Microwarpdrive I
