@@ -80,8 +80,8 @@ def text_output(table):
         print("%s: %d at %s (%s)" % parts)
 
 def html_output(table):
-    print("<html><head><title>%s market data</title>" % SYSTEM)
-    print("""
+    page_template = """
+<html><head><title>%(system)s market data</title>
 <!-- DataTables CSS -->
 <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
 
@@ -119,22 +119,32 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
   } );
 </script>
 
-</head><body>""")
-    print("<p>Data may be out of date or missing. Items might be in the wrong station. Price shown is the lowest price. If you want more items on here, message sully on IRC with links to lists of items (probably pastebinned).")
-    print("""<p><strong>Want to help out and keep this up-to-date?
-Run the <a href="/poller">poller</a> while ship-spinning in Curse!</strong>""")
+</head><body>
+<p>Data may be out of date or missing. Items might be in the wrong station. Price shown is the lowest price. If you want more items on here, message sully on IRC with links to lists of items (probably pastebinned).
+<p><strong>Want to help out and keep this up-to-date?
+Run the <a href="/poller">poller</a> while ship-spinning in Curse!</strong>
 
-    print("<h1>%s market</h1>" % SYSTEM)
-    print("""<em>Last updated %s [EVE time], from
+<h1>%(system)s market</h1>
+<em>Last updated %(timestamp)s [EVE time], from
 <a href="http://eve-central.com">eve-central</a> data no more than 24 hours old
-at that time.</em><br>""" % email.utils.formatdate(usegmt=True))
-    print("<table border=1 id='market'>")
-    print("<thead><tr><th>Item</th><th>quantity</th><th>price</th><th>group</th></tr></thead>")
-    print("<tbody>")
+at that time.</em><br>
+
+<table border=1 id='market'>
+<thead><tr><th>Item</th><th>quantity</th><th>price</th><th>group</th></tr></thead>
+<tbody>
+%(table)s
+</tbody></table></body></html>"""
+
+    table_output = ""
     for (name, count, price, group) in table:
         price_fmt = "{:,.2f}".format(price)
-        print("<tr><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>" % (name, count, price_fmt, group))
-    print("</tbody></table></body></html>")
+        table_output += "<tr><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>\n" % (name, count, price_fmt, group)
+
+    print(page_template % {
+        'system': SYSTEM,
+        'timestamp': email.utils.formatdate(usegmt=True),
+        'table': table_output
+        })
 
 def make_table(formatter):
     item_names = [s.strip() for s in open(ITEM_LIST)]
