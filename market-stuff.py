@@ -17,11 +17,14 @@ CHUNK_SIZE = 100
 SYSTEM = 'Hemin'
 ITEM_LIST = 'items'
 
-Item = namedtuple('Item', ['id', 'name', 'group'])
+Item = namedtuple('Item', ['id', 'name', 'group', 'category', 'market_group_id'])
 Row = namedtuple('Row', ['Item', 'quantity', 'price', 'group'])
+MarketGroup = namedtuple('MarketGroup', ['id', 'parent_id', 'name', 'good_name'])
 
 id2item = {}
 name2item = {}
+market_groups = {}
+market_group_useful_names = {}
 
 conn = sqlite3.connect('ody110-sqlite3-v1.db')
 
@@ -34,13 +37,67 @@ system_id = get_system_id(SYSTEM)
 
 def load_items():
     c = conn.cursor()
-    c.execute("select typeId, typeName, groupName from invtypes join invgroups on invtypes.groupID = invgroups.groupID")
+    c.execute("select typeId, typeName, groupName, categoryName, marketGroupID from invtypes join invgroups on invtypes.groupID = invgroups.groupID join invcategories on invgroups.categoryID = invcategories.categoryID")
 
-    for (itemid, name, group) in c:
-        item = Item(itemid, name, group)
+    for entry in c:
+        item = Item(*entry)
 #        print(item)
-        name2item[name] = item
-        id2item[itemid] = item
+        name2item[item.name] = item
+        id2item[item.id] = item
+
+
+def load_marketgroups():
+    c = conn.cursor()
+    c.execute("select marketGroupID, parentGroupID, marketGroupName from invmarketgroups")
+
+    for entry in c:
+        market_group = MarketGroup(*entry, good_name=None)
+        market_groups[market_group.id] = market_group
+
+    for (id, mg) in market_groups.items():
+        market_groups[id] = mg._replace(good_name = useful_market_group_name(id))
+
+# Get the list of all parents of a market group
+def get_parents(id):
+    trace = []
+    while id:
+        mg = market_groups[id]
+        trace.append(mg.name)
+        id = mg.parent_id
+    return trace
+
+# This, using some ad-hoc rules, tries to produce a useful category
+# name.  There is nothing particularly principled about this, but I
+# like the results.
+def useful_market_group_name(id):
+    # Grab the list of all of the parent market groups
+    parents = list(reversed(get_parents(id)))
+    if len(parents) == 1:
+        return parents[0]
+    elif parents[0] == 'Ship Modifications':
+        if len(parents) >= 3 and parents[1] == 'Rigs':
+            # Rig groups are named like "Electronics Superiority Rigs".
+            # We want "Rigs - Electronics Superiority"
+            name_body = parents[2].rsplit(maxsplit=1)[0]
+            rig_name = 'Rigs - ' + name_body
+            return rig_name
+        else: # This is just Subsystems, I think
+            return parents[1]
+    elif parents[0] == 'Ship Equipment':
+        # Everything under "Ship Equipment" is a module... except for deployables
+        if parents[1] == 'Deployable Equipment':
+            return parents[1]
+        else:
+            return 'Modules - ' + parents[1]
+    elif parents[0] == 'Ships':
+        # Get the real name for t2 ship classes
+        if len(parents) >= 4 and parents[2].startswith("Advanced"):
+            return 'Ships - ' + parents[3]
+        else:
+            return 'Ships - ' + parents[1]
+    else:
+        return parents[0]
+
 
 def download_data(ids):
     base_url = 'http://api.eve-central.com/api/marketstat?hours=24&usesystem=%d&' % system_id
@@ -75,7 +132,9 @@ def handle_data(table, xml):
         volume = int(read_xml_field(sell, "volume"))
         min_price = float(read_xml_field(sell, "min"))
         price_fmted = "{:,.2f}".format(min_price)
-        table.append(Row(item.name, volume, price_fmted, item.group))
+
+        row = Row(item.name, volume, price_fmted, market_groups[item.market_group_id])
+        table.append(row)
 
 def text_output(table):
     for parts in table:
@@ -163,6 +222,10 @@ def make_table(formatter):
     item_ids = [name2item[name].id for name in item_names]
 #    print(item_ids)
 
+#    for name in item_names:
+#        item = name2item[name]
+#        print(item.name, "----", market_groups[item.market_group_id].good_name, "----", get_parents(item.market_group_id))
+
     table = []
     for part in chunk(item_ids, CHUNK_SIZE):
         data = download_data(part)
@@ -183,6 +246,7 @@ def filter_input():
 
 def main(args):
     load_items()
+    load_marketgroups()
 
     if len(args) > 1 and args[1] == "--filter":
         filter_input()
