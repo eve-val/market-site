@@ -18,6 +18,7 @@ SYSTEM = 'Hemin'
 ITEM_LIST = 'items'
 
 Item = namedtuple('Item', ['id', 'name', 'group'])
+Row = namedtuple('Row', ['Item', 'quantity', 'price', 'group'])
 
 id2item = {}
 name2item = {}
@@ -73,11 +74,24 @@ def handle_data(table, xml):
         sell = item_report.getElementsByTagName("sell")[0]
         volume = int(read_xml_field(sell, "volume"))
         min_price = float(read_xml_field(sell, "min"))
-        table.append((item.name, volume, min_price, item.group))
+        price_fmted = "{:,.2f}".format(min_price)
+        table.append(Row(item.name, volume, price_fmted, item.group))
 
 def text_output(table):
     for parts in table:
         print("%s: %d at %s (%s)" % parts)
+
+def make_row(open_tag, close_tag, entries):
+    fmt_string = (open_tag + "%s" + close_tag) * len(entries)
+    return fmt_string % entries
+
+def format_table(table):
+    table_output = ""
+    for entry in table:
+        table_output += "<tr>" + make_row("<td>", "</td>", entry) + "</tr>\n"
+
+    return table_output
+
 
 def html_output(table):
     page_template = """
@@ -130,20 +144,16 @@ Run the <a href="/poller">poller</a> while ship-spinning in Curse!</strong>
 at that time.</em><br>
 
 <table border=1 id='market'>
-<thead><tr><th>Item</th><th>quantity</th><th>price</th><th>group</th></tr></thead>
+<thead><tr>%(header)s</tr></thead>
 <tbody>
 %(table)s
 </tbody></table></body></html>"""
 
-    table_output = ""
-    for (name, count, price, group) in table:
-        price_fmt = "{:,.2f}".format(price)
-        table_output += "<tr><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>\n" % (name, count, price_fmt, group)
-
     print(page_template % {
         'system': SYSTEM,
+        'header': make_row("<th>", "</th>", Row._fields),
         'timestamp': email.utils.formatdate(usegmt=True),
-        'table': table_output
+        'table': format_table(table)
         })
 
 def make_table(formatter):
