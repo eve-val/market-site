@@ -125,7 +125,7 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
   $(document).ready(function() {
     $('#market').dataTable( {
       "aoColumnDefs": [
-        { "sType": "formatted-num", "aTargets": [ 2 ] }
+        { "sType": "formatted-num", "aTargets": [ %(price_column)d ] }
       ],
       "bPaginate": false,
       "bLengthChange": false,
@@ -151,6 +151,7 @@ at that time.</em><br>
 
     print(page_template % {
         'system': SYSTEM,
+        'price_column': Row._fields.index("price"),
         'header': make_row("<th>", "</th>", Row._fields),
         'timestamp': email.utils.formatdate(usegmt=True),
         'table': format_table(table)
