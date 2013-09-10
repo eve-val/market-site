@@ -6,6 +6,7 @@
 # Something that I ran to extract module lists from copy pasted forum posts:
 # cat new-list | tr '[' '\n' | tr ',' '\n' | sed -e 's/^[ \t]*//' | sed 's/ x.$//' | sort | uniq | ./market-stuff.py --filter
 
+from collections import namedtuple
 import email
 import sys
 import sqlite3
@@ -16,8 +17,10 @@ CHUNK_SIZE = 100
 SYSTEM = 'Hemin'
 ITEM_LIST = 'items'
 
-name2id = {}
-id2name = {}
+Item = namedtuple('Item', ['id', 'name', 'group'])
+
+id2item = {}
+name2item = {}
 
 conn = sqlite3.connect('ody110-sqlite3-v1.db')
 
@@ -30,12 +33,13 @@ system_id = get_system_id(SYSTEM)
 
 def load_items():
     c = conn.cursor()
-    c.execute("SELECT typeId, typeName from invTypes")
+    c.execute("select typeId, typeName, groupName from invtypes join invgroups on invtypes.groupID = invgroups.groupID")
 
-    for (itemid, name) in c:
-#        print(itemid, name)
-        name2id[name] = itemid
-        id2name[itemid] = name
+    for (itemid, name, group) in c:
+        item = Item(itemid, name, group)
+#        print(item)
+        name2item[name] = item
+        id2item[itemid] = item
 
 def download_data(ids):
     base_url = 'http://api.eve-central.com/api/marketstat?hours=24&usesystem=%d&' % system_id
@@ -62,16 +66,18 @@ def read_xml_field(node, key):
 
 def handle_data(table, xml):
     items = xml.getElementsByTagName("type")
-    for item in items:
-        i = int(item.getAttribute("id"))
-        sell = item.getElementsByTagName("sell")[0]
+    for item_report in items:
+        i = int(item_report.getAttribute("id"))
+        item = id2item[i]
+
+        sell = item_report.getElementsByTagName("sell")[0]
         volume = int(read_xml_field(sell, "volume"))
         min_price = float(read_xml_field(sell, "min"))
-        table.append((id2name[i], volume, min_price))
+        table.append((item.name, volume, min_price, item.group))
 
 def text_output(table):
     for parts in table:
-        print("%s: %d at %s" % parts)
+        print("%s: %d at %s (%s)" % parts)
 
 def html_output(table):
     print("<html><head><title>%s market data</title>" % SYSTEM)
@@ -123,17 +129,17 @@ Run the <a href="/poller">poller</a> while ship-spinning in Curse!</strong>""")
 <a href="http://eve-central.com">eve-central</a> data no more than 24 hours old
 at that time.</em><br>""" % email.utils.formatdate(usegmt=True))
     print("<table border=1 id='market'>")
-    print("<thead><tr><th>Item</th><th>quantity</th><th>price</th></tr></thead>")
+    print("<thead><tr><th>Item</th><th>quantity</th><th>price</th><th>group</th></tr></thead>")
     print("<tbody>")
-    for (name, count, price) in table:
+    for (name, count, price, group) in table:
         price_fmt = "{:,.2f}".format(price)
-        print("<tr><td>%s</td><td>%d</td><td>%s</td></tr>" % (name, count, price_fmt))
+        print("<tr><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>" % (name, count, price_fmt, group))
     print("</tbody></table></body></html>")
 
 def make_table(formatter):
     item_names = [s.strip() for s in open(ITEM_LIST)]
 #    print(item_names)
-    item_ids = [name2id[name] for name in item_names]
+    item_ids = [name2item[name].id for name in item_names]
 #    print(item_ids)
 
     table = []
@@ -145,13 +151,13 @@ def make_table(formatter):
 
 def make_poller():
     item_names = [s.strip() for s in open(ITEM_LIST)]
-    item_ids = [name2id[name] for name in item_names]
+    item_ids = [name2item[name].id for name in item_names]
     print("item_ids = %s;" % str(item_ids))
 
 def filter_input():
     for name in sys.stdin:
         name = name.strip()
-        if name in name2id:
+        if name in name2item:
             print(name)
 
 def main(args):
