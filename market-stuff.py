@@ -88,7 +88,9 @@ def useful_market_group_name(id):
         if parents[1] == 'Deployable Equipment':
             return parents[1]
         else:
-            return 'Modules - ' + parents[1]
+            # "Electronics and Sensor Upgrades" is really long and should be shorter.
+            name = parents[1] if parents[1] != "Electronics and Sensor Upgrades" else "Electronics Upgrades"
+            return 'Modules - ' + name
     elif parents[0] == 'Ships':
         # Get the real name for t2 ship classes
         if len(parents) >= 4 and parents[2].startswith("Advanced"):
