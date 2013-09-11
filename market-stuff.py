@@ -18,7 +18,7 @@ SYSTEM = 'Hemin'
 ITEM_LIST = 'items'
 
 Item = namedtuple('Item', ['id', 'name', 'group', 'category', 'market_group_id'])
-Row = namedtuple('Row', ['Item', 'quantity', 'price', 'group'])
+Row = namedtuple('Row', ['Group', 'Item', 'Quantity', 'Price'])
 MarketGroup = namedtuple('MarketGroup', ['id', 'parent_id', 'name', 'good_name'])
 
 id2item = {}
@@ -133,7 +133,7 @@ def handle_data(table, xml):
         min_price = float(read_xml_field(sell, "min"))
         price_fmted = "{:,.2f}".format(min_price)
 
-        row = Row(item.name, volume, price_fmted, market_groups[item.market_group_id])
+        row = Row(Item=item.name, Quantity=volume, Price=price_fmted, Group=market_groups[item.market_group_id].good_name)
         table.append(row)
 
 def text_output(table):
@@ -210,7 +210,7 @@ at that time.</em><br>
 
     print(page_template % {
         'system': SYSTEM,
-        'price_column': Row._fields.index("price"),
+        'price_column': Row._fields.index("Price"),
         'header': make_row("<th>", "</th>", Row._fields),
         'timestamp': email.utils.formatdate(usegmt=True),
         'table': format_table(table)
