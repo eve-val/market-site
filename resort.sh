@@ -1,3 +1,3 @@
 #!/bin/sh
 TMPFILE=`tempfile`
-LANG=C sort items > $TMPFILE && mv $TMPFILE items
+LANG=C sort items | uniq > $TMPFILE && mv $TMPFILE items
