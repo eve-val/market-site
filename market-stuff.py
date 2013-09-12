@@ -16,6 +16,7 @@ from xml.dom.minidom import parseString
 CHUNK_SIZE = 100
 SYSTEM = 'Hemin'
 ITEM_LIST = 'items'
+EVECENTRAL_HOURS = 48
 
 Item = namedtuple('Item', ['id', 'name', 'group', 'category', 'market_group_id'])
 Row = namedtuple('Row', ['Group', 'Item', 'Quantity', 'Price'])
@@ -31,7 +32,7 @@ conn = sqlite3.connect('ody110-sqlite3-v1.db')
 def get_system_id(name):
     c = conn.cursor()
     c.execute("SELECT itemID from invnames where itemName = ?", (name,))
-    return c.fetchone()
+    return c.fetchone()[0]
 
 system_id = get_system_id(SYSTEM)
 
@@ -102,7 +103,7 @@ def useful_market_group_name(id):
 
 
 def download_data(ids):
-    base_url = 'http://api.eve-central.com/api/marketstat?hours=24&usesystem=%d&' % system_id
+    base_url = 'http://api.eve-central.com/api/marketstat?hours=%d&usesystem=%d&' % (EVECENTRAL_HOURS, system_id)
     suffix = "&".join("typeid=%d" % i for i in ids)
     url = base_url + suffix
 #    print(url)
@@ -201,7 +202,7 @@ Run the <a href="/poller">poller</a> while ship-spinning in Curse!</strong>
 
 <h1>%(system)s market</h1>
 <em>Last updated %(timestamp)s [EVE time], from
-<a href="http://eve-central.com">eve-central</a> data no more than 24 hours old
+<a href="http://eve-central.com">eve-central</a> data no more than %(data_age)d hours old
 at that time.</em><br>
 
 <table border=1 id='market'>
@@ -215,7 +216,8 @@ at that time.</em><br>
         'price_column': Row._fields.index("Price"),
         'header': make_row("<th>", "</th>", Row._fields),
         'timestamp': email.utils.formatdate(usegmt=True),
-        'table': format_table(table)
+        'data_age': EVECENTRAL_HOURS,
+        'table': format_table(table),
         })
 
 def make_table(formatter):
