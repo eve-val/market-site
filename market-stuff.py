@@ -14,7 +14,6 @@ import urllib.request as urlreq
 from xml.dom.minidom import parseString
 
 CHUNK_SIZE = 100
-SYSTEM = 'Hemin'
 ITEM_LIST = 'items'
 EVECENTRAL_HOURS = 48
 
@@ -33,8 +32,6 @@ def get_system_id(name):
     c = conn.cursor()
     c.execute("SELECT itemID from invnames where itemName = ?", (name,))
     return c.fetchone()[0]
-
-system_id = get_system_id(SYSTEM)
 
 def load_items():
     c = conn.cursor()
@@ -102,7 +99,7 @@ def useful_market_group_name(id):
         return parents[0]
 
 
-def download_data(ids):
+def download_data(ids, system_id):
     base_url = 'http://api.eve-central.com/api/marketstat?hours=%d&usesystem=%d&' % (EVECENTRAL_HOURS, system_id)
     suffix = "&".join("typeid=%d" % i for i in ids)
     url = base_url + suffix
@@ -155,7 +152,7 @@ def format_table(table):
     return table_output
 
 
-def html_output(table):
+def html_output(table, system):
     page_template = """
 <html><head><title>%(system)s market data</title>
 <!-- DataTables CSS -->
@@ -212,7 +209,7 @@ at that time.</em><br>
 </tbody></table></body></html>"""
 
     print(page_template % {
-        'system': SYSTEM,
+        'system': system,
         'price_column': Row._fields.index("Price"),
         'header': make_row("<th>", "</th>", Row._fields),
         'timestamp': email.utils.formatdate(usegmt=True),
@@ -220,7 +217,7 @@ at that time.</em><br>
         'table': format_table(table),
         })
 
-def make_table(formatter):
+def make_table(formatter, system):
     item_names = [s.strip() for s in open(ITEM_LIST)]
 #    print(item_names)
     item_ids = [name2item[name].id for name in item_names]
@@ -230,12 +227,13 @@ def make_table(formatter):
 #        item = name2item[name]
 #        print(item.name, "----", market_groups[item.market_group_id].good_name, "----", get_parents(item.market_group_id))
 
+    system_id = get_system_id(system)
     table = []
     for part in chunk(item_ids, CHUNK_SIZE):
-        data = download_data(part)
+        data = download_data(part, system_id)
         handle_data(table, data)
 
-    formatter(table)
+    formatter(table, system)
 
 def make_poller():
     item_names = [s.strip() for s in open(ITEM_LIST)]
@@ -256,10 +254,13 @@ def main(args):
         filter_input()
     elif len(args) > 1 and args[1] == "--poller":
         make_poller()
-    elif len(args) > 1 and args[1] == "--text":
-        make_table(text_output)
+    elif len(args) > 2 and args[1] == "--text":
+        make_table(text_output, args[2])
+    elif len(args) > 1:
+        make_table(html_output, args[1])
     else:
-        make_table(html_output)
+        sys.stderr.write("usage: %s --filter | --poller | --text SYSTEM | SYSTEM\n" % args[0])
+        return 1
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
