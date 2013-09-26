@@ -12,12 +12,18 @@
 150mm Railgun II
 1600mm Reinforced Rolled Tungsten Plates I
 1600mm Reinforced Steel Plates II
+1MN Afterburner II
 200mm AutoCannon II
 200mm Prototype Gauss Gun
 200mm Railgun II
 200mm Reinforced Rolled Tungsten Plates I
+220mm Vulcan AutoCannon II
 250mm Prototype Gauss Gun
 250mm Railgun II
+400mm Reinforced Rolled Tungsten Plates I
+425mm AutoCannon II
+425mm Medium 'Scout' Autocannon I
+425mm Medium Prototype Automatic Cannon
 50W Infectious Power System Malfunction
 5W Infectious Power System Malfunction
 650mm Artillery Cannon II
@@ -73,6 +79,7 @@ Conjunctive Magnetometric ECCM Scanning Array I
 Conjunctive Radar ECCM Scanning Array I
 Corelum C-Type Medium Remote Armor Repairer
 Cormorant
+Counterbalanced Weapon Mounts I
 Covert Ops Cloaking Device II
 Curator I
 Curator II
@@ -81,8 +88,13 @@ Damage Control II
 Drake
 Drone Damage Amplifier II
 Drone Link Augmentor I
+Dual 180mm 'Scout' Autocannon I
+Dual 180mm Prototype Automatic Cannon
+E5 Prototype Energy Vampire
 E50 Prototype Energy Vampire
+E500 Prototype Energy Vampire
 EM Ward Amplifier II
+EM Ward Field II
 EMP M
 Energized Adaptive Nano Membrane II
 Enfeebling Phase Inversion ECM I
@@ -91,6 +103,7 @@ Experimental 10MN Afterburner I
 Experimental 10MN Microwarpdrive I
 F-90 Positional Sensor Subroutines
 Faint Epsilon Warp Scrambler I
+Faint Warp Disruptor I
 Fleeting Propulsion Inhibitor I
 Flycatcher
 Fourier Transform Tracking Program
@@ -110,6 +123,7 @@ Heavy Capacitor Booster II
 Heavy Electrochemical Capacitor Booster I
 Heavy Electron Blaster II
 Heavy Ion Blaster II
+Heavy Modulated Pulse Energy Beam I
 Heavy Neutron Blaster II
 Heavy Pulse Laser II
 Heavy Unstable Power Fluctuator I
@@ -123,6 +137,7 @@ Imperial Navy Multifrequency M
 Inferno Torpedo
 Interdiction Sphere Launcher I
 Internal Force Field Array I
+J5 Prototype Warp Disruptor I
 J5b Phased Prototype Warp Scrambler I
 Large 'Notos' Explosive Charge I
 Large 'Regard' Remote Capacitor Transmitter
@@ -130,6 +145,7 @@ Large 'Solace' Remote Armor Repairer
 Large 'Vehemence' Shockwave Charge
 Large Anti-Explosive Pump I
 Large Bay Loading Accelerator I
+Large Capacitor Control Circuit I
 Large F-S9 Regolith Shield Induction
 Large Hydraulic Bay Thrusters I
 Large Micro Jump Drive
@@ -155,6 +171,7 @@ Medium Anti-Kinetic Screen Reinforcer I
 Medium Anti-Thermal Screen Reinforcer I
 Medium Armor Maintenance Bot I
 Medium Armor Repairer II
+Medium Auxiliary Thrusters I
 Medium Azeotropic Ward Salubrity I
 Medium Bay Loading Accelerator I
 Medium Capacitor Control Circuit I
@@ -165,6 +182,8 @@ Medium F-S9 Regolith Shield Induction
 Medium Particle Dispersion Augmentor I
 Medium Particle Dispersion Projector I
 Medium Polycarbon Engine Housing I
+Medium Projectile Burst Aerator I
+Medium Projectile Collision Accelerator I
 Medium Remote Armor Repairer II
 Medium Remote Repair Augmentor I
 Medium S95a Remote Shield Booster
@@ -172,6 +191,8 @@ Medium Shield Extender II
 Medium Shield Maintenance Bot I
 Medium Trimark Armor Pump I
 Mega Pulse Laser II
+Micro Auxiliary Power Core I
+Micro Auxiliary Power Core II
 Mjolnir Light Missile
 Mjolnir Torpedo
 Mobile Large Warp Disruptor I
@@ -187,7 +208,9 @@ Modal Light Ion Particle Accelerator I
 Modal Light Neutron Particle Accelerator I
 Modal Mega Neutron Particle Accelerator I
 Modal Neutron Particle Accelerator I
+Nanite Repair Paste
 Nanofiber Internal Structure II
+Navy Cap Booster 200
 Navy Cap Booster 400
 Navy Cap Booster 800
 Nemesis
@@ -212,6 +235,7 @@ Purifier
 Rapid Light Missile Launcher II
 Reactive Armor Hardener
 Reactor Control Unit I
+Reactor Control Unit II
 Republic Fleet EMP L
 Republic Fleet EMP M
 Republic Fleet EMP S
@@ -247,6 +271,8 @@ Small Particle Dispersion Augmentor I
 Small Particle Dispersion Projector I
 Small Polycarbon Engine Housing I
 Small Processor Overclocking Unit I
+Small Projectile Burst Aerator I
+Small Projectile Collision Accelerator I
 Small Trimark Armor Pump I
 Small Unstable Power Fluctuator I
 Stabber Fleet Issue
@@ -254,6 +280,7 @@ Stasis Webifier II
 Talos
 Targeting Range Dampening Script
 Targeting Range Script
+Thermic Dissipation Field II
 Thorax
 Tracking Computer II
 Tracking Enhancer II
