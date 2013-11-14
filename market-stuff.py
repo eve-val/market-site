@@ -7,11 +7,11 @@
 # cat new-list | tr '[' '\n' | tr ',' '\n' | sed -e 's/^[ \t]*//' | sed 's/ x.$//' | sort | uniq | ./market-stuff.py --filter
 
 from collections import namedtuple
-import email
-import sys
-import sqlite3
-import urllib.request as urlreq
 from xml.dom.minidom import parseString
+import email
+import sqlite3
+import sys
+import urllib.request as urlreq
 
 CHUNK_SIZE = 100
 ITEM_LIST = 'items'
