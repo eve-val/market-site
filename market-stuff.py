@@ -85,7 +85,7 @@ def useful_market_group_name(id):
         if len(parents) >= 3 and parents[1] == 'Rigs':
             # Rig groups are named like "Electronics Superiority Rigs".
             # We want "Rigs - Electronics Superiority"
-            name_body = parents[2].rsplit(maxsplit=1)[0]
+            name_body = parents[2].rsplit(None, 1)[0]
             rig_name = 'Rigs - ' + name_body
             return rig_name
         else: # This is just Subsystems, I think
