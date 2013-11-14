@@ -26,7 +26,16 @@ name2item = {}
 market_groups = {}
 market_group_useful_names = {}
 
-conn = sqlite3.connect('ody110-sqlite3-v1.db')
+conn = None
+try:
+    conn = sqlite3.connect('ody110-sqlite3-v1.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    if len(cursor.fetchall()) == 0:
+        raise Exception("database is empty")
+except Exception as e:
+    print("Could not open Eve database dump:", str(e), file=sys.stderr)
+    sys.exit(1)
 
 def get_system_id(name):
     c = conn.cursor()
