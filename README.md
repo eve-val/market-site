@@ -8,6 +8,6 @@ Requirements
 
 How to run
 ----------
-update_data.sh - generates the data and html files.
-update.sh - wraps update_data.sh with a git pull command and then scps the output into the cloud.
-resort.sh - resorts the items file
+* update_data.sh - generates the data and html files.
+* update.sh - wraps update_data.sh with a git pull command and then scps the output into the cloud.
+* resort.sh - resorts the items file
