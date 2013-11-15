@@ -4,7 +4,7 @@ market-site
 Requirements
 ------------
 * Needs python3
-* You can get the Eve database dump from here: http://pozniak.pl/dbdump/ - You want the file for the latest version of eve in sqlite3 format.
+* You can get the Eve database dump from here: http://pozniak.pl/dbdump/ - You want the file for the latest version of eve in sqlite3 format. See below for a script that automates this.
 
 How to run
 ----------
