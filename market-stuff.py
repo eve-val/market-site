@@ -7,18 +7,30 @@
 # cat new-list | tr '[' '\n' | tr ',' '\n' | sed -e 's/^[ \t]*//' | sed 's/ x.$//' | sort | uniq | ./market-stuff.py --filter
 
 from collections import namedtuple
-import email
-import sys
-import sqlite3
-import urllib.request as urlreq
 from xml.dom.minidom import parseString
+import collections
+import email
+import sqlite3
+import sys
+import urllib.request as urlreq
 
 CHUNK_SIZE = 100
 ITEM_LIST = 'items'
 EVECENTRAL_HOURS = 48
+MARKET_HUB = 'Jita'
+
+row_header = collections.OrderedDict([
+        ('Group', 'Group'),
+        ('Item', 'Item'),
+        ('Volume', 'Volume'),
+        ('Price', 'Price'),
+        ('HubVolume', '%s Volume' % MARKET_HUB),
+        ('HubPrice', '%s Price' % MARKET_HUB),
+        ('HubRelative', 'Relative to %s' % MARKET_HUB)
+])
 
 Item = namedtuple('Item', ['id', 'name', 'group', 'category', 'market_group_id'])
-Row = namedtuple('Row', ['Group', 'Item', 'Quantity', 'Price'])
+Row = namedtuple('Row', row_header.keys())
 MarketGroup = namedtuple('MarketGroup', ['id', 'parent_id', 'name', 'good_name'])
 
 id2item = {}
@@ -26,7 +38,16 @@ name2item = {}
 market_groups = {}
 market_group_useful_names = {}
 
-conn = sqlite3.connect('ody110-sqlite3-v1.db')
+conn = None
+try:
+    conn = sqlite3.connect('eve-dump.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    if len(cursor.fetchall()) == 0:
+        raise Exception("database is empty")
+except Exception as e:
+    print("Could not open Eve database dump:", str(e), file=sys.stderr)
+    sys.exit(1)
 
 def get_system_id(name):
     c = conn.cursor()
@@ -76,7 +97,7 @@ def useful_market_group_name(id):
         if len(parents) >= 3 and parents[1] == 'Rigs':
             # Rig groups are named like "Electronics Superiority Rigs".
             # We want "Rigs - Electronics Superiority"
-            name_body = parents[2].rsplit(maxsplit=1)[0]
+            name_body = parents[2].rsplit(None, 1)[0]
             rig_name = 'Rigs - ' + name_body
             return rig_name
         else: # This is just Subsystems, I think
@@ -122,8 +143,9 @@ def chunk(l, size):
 def read_xml_field(node, key):
     return node.getElementsByTagName(key)[0].childNodes[0].data
 
-def handle_data(table, xml):
+def handle_data(table, xml, hub_xml):
     items = xml.getElementsByTagName("type")
+    hub_iter = iter(hub_xml.getElementsByTagName("type"))
     for item_report in items:
         i = int(item_report.getAttribute("id"))
         item = id2item[i]
@@ -133,21 +155,49 @@ def handle_data(table, xml):
         min_price = float(read_xml_field(sell, "min"))
         price_fmted = "{:,.2f}".format(min_price)
 
-        row = Row(Item=item.name, Quantity=volume, Price=price_fmted, Group=market_groups[item.market_group_id].good_name)
+        hub_item = next(hub_iter)
+        assert int(hub_item.getAttribute("id")) == i
+        hub_sell = hub_item.getElementsByTagName("sell")[0]
+        hub_volume = int(read_xml_field(hub_sell, "volume"))
+        hub_min_price = float(read_xml_field(hub_sell, "min"))
+        hub_price_fmted = "{:,.2f}".format(hub_min_price)
+        hub_relative = (min_price - hub_min_price) * 100.0 / (hub_min_price)
+        hub_relative_formatted = "{:.1f}%".format(hub_relative)
+
+        row = Row(Item=item.name, Volume=volume, Price=price_fmted, HubVolume=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=market_groups[item.market_group_id].good_name)
         table.append(row)
 
 def text_output(table):
     for parts in table:
         print("%s: %d at %s (%s)" % parts)
 
-def make_row(open_tag, close_tag, entries):
+def make_tag(name, attribs=None):
+    if attribs:
+        return "<%s %s>" % (name, ' '.join("{!s}={!r}".format(key,val) for (key,val) in attribs.items()))
+    else:
+        return "<%s>" % name
+
+def make_row(open_tag, close_tag, entries, classes=None):
     fmt_string = (open_tag + "%s" + close_tag) * len(entries)
-    return fmt_string % entries
+    cells = fmt_string % tuple(entries)
+    attribs = {}
+    if classes:
+        attribs['class'] = ' '.join(classes)
+    return "%s%s%s" % (make_tag('tr', attribs), cells, '</tr>')
 
 def format_table(table):
     table_output = ""
     for entry in table:
-        table_output += "<tr>" + make_row("<td>", "</td>", entry) + "</tr>\n"
+        classes = []
+        if entry.Volume == 0:
+            classes.append('market_hole')
+        elif not entry.HubRelative.startswith("0.0"):
+            if entry.HubRelative[0] == '-':
+                classes.append('relative_negative')
+            else:
+                classes.append('relative_positive')
+
+        table_output += make_row("<td>", "</td>", entry, classes=classes) + "\n"
 
     return table_output
 
@@ -157,6 +207,7 @@ def html_output(table, system):
 <html><head><title>%(system)s market data</title>
 <!-- DataTables CSS -->
 <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="market.css">
 
 <!-- jQuery -->
 <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
@@ -203,7 +254,7 @@ Run the <a href="/poller">poller</a> while ship-spinning in Placid/Syndicate!</s
 at that time.</em><br>
 
 <table border=1 id='market'>
-<thead><tr>%(header)s</tr></thead>
+<thead>%(header)s</thead>
 <tbody>
 %(table)s
 </tbody></table></body></html>"""
@@ -211,7 +262,7 @@ at that time.</em><br>
     print(page_template % {
         'system': system,
         'price_column': Row._fields.index("Price"),
-        'header': make_row("<th>", "</th>", Row._fields),
+        'header': make_row("<th>", "</th>", row_header.values()),
         'timestamp': email.utils.formatdate(usegmt=True),
         'data_age': EVECENTRAL_HOURS,
         'table': format_table(table),
@@ -228,10 +279,12 @@ def make_table(formatter, system):
 #        print(item.name, "----", market_groups[item.market_group_id].good_name, "----", get_parents(item.market_group_id))
 
     system_id = get_system_id(system)
+    hub_system_id = get_system_id(MARKET_HUB)
     table = []
     for part in chunk(item_ids, CHUNK_SIZE):
         data = download_data(part, system_id)
-        handle_data(table, data)
+        hub_data = download_data(part, hub_system_id)
+        handle_data(table, data, hub_data)
 
     formatter(table, system)
 

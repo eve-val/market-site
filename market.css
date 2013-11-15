@@ -1,0 +1,10 @@
+.relative_positive td:last-child {
+    color: green;
+}
+.relative_negative td:last-child {
+    color: red;
+}
+.market_hole td:nth-child(3),
+.market_hole td:nth-child(4) {
+    color:orange
+}
