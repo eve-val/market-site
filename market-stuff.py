@@ -8,6 +8,7 @@
 
 from collections import namedtuple
 from xml.dom.minidom import parseString
+import collections
 import email
 import sqlite3
 import sys
@@ -16,9 +17,20 @@ import urllib.request as urlreq
 CHUNK_SIZE = 100
 ITEM_LIST = 'items'
 EVECENTRAL_HOURS = 48
+MARKET_HUB = 'Jita'
+
+row_header = collections.OrderedDict([
+        ('Group', 'Group'),
+        ('Item', 'Item'),
+        ('Quantity', 'Quantity'),
+        ('Price', 'Price'),
+        ('HubQuantity', '%s Quantity' % MARKET_HUB),
+        ('HubPrice', '%s Price' % MARKET_HUB),
+        ('HubRelative', 'Relative to %s'),
+])
 
 Item = namedtuple('Item', ['id', 'name', 'group', 'category', 'market_group_id'])
-Row = namedtuple('Row', ['Group', 'Item', 'Quantity', 'Price'])
+Row = namedtuple('Row', row_header.keys())
 MarketGroup = namedtuple('MarketGroup', ['id', 'parent_id', 'name', 'good_name'])
 
 id2item = {}
@@ -131,8 +143,9 @@ def chunk(l, size):
 def read_xml_field(node, key):
     return node.getElementsByTagName(key)[0].childNodes[0].data
 
-def handle_data(table, xml):
+def handle_data(table, xml, hub_xml):
     items = xml.getElementsByTagName("type")
+    hub_iter = iter(hub_xml.getElementsByTagName("type"))
     for item_report in items:
         i = int(item_report.getAttribute("id"))
         item = id2item[i]
@@ -142,7 +155,16 @@ def handle_data(table, xml):
         min_price = float(read_xml_field(sell, "min"))
         price_fmted = "{:,.2f}".format(min_price)
 
-        row = Row(Item=item.name, Quantity=volume, Price=price_fmted, Group=market_groups[item.market_group_id].good_name)
+        hub_item = next(hub_iter)
+        assert int(hub_item.getAttribute("id")) == i
+        hub_sell = hub_item.getElementsByTagName("sell")[0]
+        hub_volume = int(read_xml_field(hub_sell, "volume"))
+        hub_min_price = float(read_xml_field(hub_sell, "min"))
+        hub_price_fmted = "{:,.2f}".format(hub_min_price)
+        hub_relative = (min_price - hub_min_price) * 100.0 / (hub_min_price)
+        hub_relative_formatted = "{:.1f}%".format(hub_relative)
+
+        row = Row(Item=item.name, Quantity=volume, Price=price_fmted, HubQuantity=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=market_groups[item.market_group_id].good_name)
         table.append(row)
 
 def text_output(table):
@@ -237,10 +259,13 @@ def make_table(formatter, system):
 #        print(item.name, "----", market_groups[item.market_group_id].good_name, "----", get_parents(item.market_group_id))
 
     system_id = get_system_id(system)
+    hub_system_id = get_system_id(MARKET_HUB)
     table = []
     for part in chunk(item_ids, CHUNK_SIZE):
+        print("Part:", part)
         data = download_data(part, system_id)
-        handle_data(table, data)
+        hub_data = download_data(part, hub_system_id)
+        handle_data(table, data, hub_data)
 
     formatter(table, system)
 
