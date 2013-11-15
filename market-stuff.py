@@ -22,9 +22,9 @@ MARKET_HUB = 'Jita'
 row_header = collections.OrderedDict([
         ('Group', 'Group'),
         ('Item', 'Item'),
-        ('Quantity', 'Quantity'),
+        ('Volume', 'Volume'),
         ('Price', 'Price'),
-        ('HubQuantity', '%s Quantity' % MARKET_HUB),
+        ('HubVolume', '%s Volume' % MARKET_HUB),
         ('HubPrice', '%s Price' % MARKET_HUB),
         ('HubRelative', 'Relative to %s' % MARKET_HUB)
 ])
@@ -164,18 +164,20 @@ def handle_data(table, xml, hub_xml):
         hub_relative = (min_price - hub_min_price) * 100.0 / (hub_min_price)
         hub_relative_formatted = "{:.1f}%".format(hub_relative)
 
-        row = Row(Item=item.name, Quantity=volume, Price=price_fmted, HubQuantity=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=market_groups[item.market_group_id].good_name)
+        row = Row(Item=item.name, Volume=volume, Price=price_fmted, HubVolume=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=market_groups[item.market_group_id].good_name)
         table.append(row)
 
 def text_output(table):
     for parts in table:
         print("%s: %d at %s (%s)" % parts)
 
-def make_tag(name, attribs):
-    return "<%s>" % name
+def make_tag(name, attribs=None):
+    if attribs:
+        return "<%s %s>" % (name, ' '.join("{!s}={!r}".format(key,val) for (key,val) in attribs.items()))
+    else:
+        return "<%s>" % name
 
 def make_row(open_tag, close_tag, entries, classes=None):
-    
     fmt_string = (open_tag + "%s" + close_tag) * len(entries)
     cells = fmt_string % tuple(entries)
     attribs = {}
@@ -186,7 +188,16 @@ def make_row(open_tag, close_tag, entries, classes=None):
 def format_table(table):
     table_output = ""
     for entry in table:
-        table_output += make_row("<td>", "</td>", entry) + "\n"
+        classes = []
+        if entry.Volume == 0:
+            classes.append('market_hole')
+        elif not entry.HubRelative.startswith("0.0"):
+            if entry.HubRelative[0] == '-':
+                classes.append('relative_negative')
+            else:
+                classes.append('relative_positive')
+
+        table_output += make_row("<td>", "</td>", entry, classes=classes) + "\n"
 
     return table_output
 
@@ -196,6 +207,7 @@ def html_output(table, system):
 <html><head><title>%(system)s market data</title>
 <!-- DataTables CSS -->
 <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="market.css">
 
 <!-- jQuery -->
 <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
