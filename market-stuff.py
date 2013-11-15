@@ -26,7 +26,7 @@ row_header = collections.OrderedDict([
         ('Price', 'Price'),
         ('HubQuantity', '%s Quantity' % MARKET_HUB),
         ('HubPrice', '%s Price' % MARKET_HUB),
-        ('HubRelative', 'Relative to %s'),
+        ('HubRelative', 'Relative to %s' % MARKET_HUB)
 ])
 
 Item = namedtuple('Item', ['id', 'name', 'group', 'category', 'market_group_id'])
@@ -173,7 +173,7 @@ def text_output(table):
 
 def make_row(open_tag, close_tag, entries):
     fmt_string = (open_tag + "%s" + close_tag) * len(entries)
-    return fmt_string % entries
+    return fmt_string % tuple(entries)
 
 def format_table(table):
     table_output = ""
@@ -242,7 +242,7 @@ at that time.</em><br>
     print(page_template % {
         'system': system,
         'price_column': Row._fields.index("Price"),
-        'header': make_row("<th>", "</th>", Row._fields),
+        'header': make_row("<th>", "</th>", row_header.values()),
         'timestamp': email.utils.formatdate(usegmt=True),
         'data_age': EVECENTRAL_HOURS,
         'table': format_table(table),
