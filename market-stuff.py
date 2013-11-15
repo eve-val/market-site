@@ -171,14 +171,22 @@ def text_output(table):
     for parts in table:
         print("%s: %d at %s (%s)" % parts)
 
-def make_row(open_tag, close_tag, entries):
+def make_tag(name, attribs):
+    return "<%s>" % name
+
+def make_row(open_tag, close_tag, entries, classes=None):
+    
     fmt_string = (open_tag + "%s" + close_tag) * len(entries)
-    return fmt_string % tuple(entries)
+    cells = fmt_string % tuple(entries)
+    attribs = {}
+    if classes:
+        attribs['class'] = ' '.join(classes)
+    return "%s%s%s" % (make_tag('tr', attribs), cells, '</tr>')
 
 def format_table(table):
     table_output = ""
     for entry in table:
-        table_output += "<tr>" + make_row("<td>", "</td>", entry) + "</tr>\n"
+        table_output += make_row("<td>", "</td>", entry) + "\n"
 
     return table_output
 
@@ -234,7 +242,7 @@ Run the <a href="/poller">poller</a> while ship-spinning in Placid/Syndicate!</s
 at that time.</em><br>
 
 <table border=1 id='market'>
-<thead><tr>%(header)s</tr></thead>
+<thead>%(header)s</thead>
 <tbody>
 %(table)s
 </tbody></table></body></html>"""
