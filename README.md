@@ -10,4 +10,5 @@ How to run
 ----------
 * update_data.sh - generates the data and html files.
 * update.sh - wraps update_data.sh with a git pull command and then scps the output into the cloud.
-* resort.sh - resorts the items file
+* resort.sh - resorts the items file.
+* fetch_eve_db.sh - fetches the Eve database dump and uncompresses it to the location expected by the other tools.
