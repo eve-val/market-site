@@ -28,7 +28,7 @@ market_group_useful_names = {}
 
 conn = None
 try:
-    conn = sqlite3.connect('ody110-sqlite3-v1.db')
+    conn = sqlite3.connect('eve-dump.db')
     cursor = conn.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
     if len(cursor.fetchall()) == 0:
