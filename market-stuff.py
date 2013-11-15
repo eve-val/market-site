@@ -262,6 +262,7 @@ def make_table(formatter, system):
     hub_system_id = get_system_id(MARKET_HUB)
     table = []
     for part in chunk(item_ids, CHUNK_SIZE):
+        print("Part:", part)
         data = download_data(part, system_id)
         hub_data = download_data(part, hub_system_id)
         handle_data(table, data, hub_data)
