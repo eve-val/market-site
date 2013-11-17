@@ -19,18 +19,26 @@ ITEM_LIST = 'items'
 EVECENTRAL_HOURS = 48
 MARKET_HUB = 'Jita'
 
-row_header = collections.OrderedDict([
-        ('Group', 'Group'),
-        ('Item', 'Item'),
-        ('Volume', 'Volume'),
-        ('Price', 'Price'),
-        ('HubVolume', '%s Volume' % MARKET_HUB),
-        ('HubPrice', '%s Price' % MARKET_HUB),
-        ('HubRelative', 'Relative to %s' % MARKET_HUB)
+ColumnProperties = namedtuple('ColumnProperties', ['display_name', 'is_numeric'])
+column_properties = collections.OrderedDict([
+        ('Group',
+         ColumnProperties(is_numeric=False, display_name='Group')),
+        ('Item',
+         ColumnProperties(is_numeric=False, display_name='Item')),
+        ('Volume',
+         ColumnProperties(is_numeric=True,  display_name='Volume')),
+        ('Price',
+         ColumnProperties(is_numeric=True,  display_name='Price')),
+        ('HubVolume',
+         ColumnProperties(is_numeric=True,  display_name='%s Volume' % MARKET_HUB)),
+        ('HubPrice',
+         ColumnProperties(is_numeric=True,  display_name='%s Price' % MARKET_HUB)),
+        ('HubRelative',
+         ColumnProperties(is_numeric=True,  display_name='Relative to %s' % MARKET_HUB)),
 ])
 
 Item = namedtuple('Item', ['id', 'name', 'group', 'category', 'market_group_id'])
-Row = namedtuple('Row', row_header.keys())
+Row = namedtuple('Row', column_properties.keys())
 MarketGroup = namedtuple('MarketGroup', ['id', 'parent_id', 'name', 'good_name'])
 
 id2item = {}
@@ -235,7 +243,7 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
   $(document).ready(function() {
     $('#market').dataTable( {
       "aoColumnDefs": [
-        { "sType": "formatted-num", "aTargets": [ %(price_column)d ] }
+        { "sType": "formatted-num", "aTargets": %(numeric_columns)s }
       ],
       "bPaginate": false,
       "bLengthChange": false,
@@ -261,8 +269,8 @@ at that time.</em><br>
 
     print(page_template % {
         'system': system,
-        'price_column': Row._fields.index("Price"),
-        'header': make_row("<th>", "</th>", row_header.values()),
+        'numeric_columns': [index for index, column in enumerate(column_properties.values()) if column.is_numeric],
+        'header': make_row("<th>", "</th>", [column.display_name for column in column_properties.values()]),
         'timestamp': email.utils.formatdate(usegmt=True),
         'data_age': EVECENTRAL_HOURS,
         'table': format_table(table),
