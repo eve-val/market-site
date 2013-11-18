@@ -14,6 +14,7 @@
 1600mm Reinforced Steel Plates II
 1MN Afterburner II
 200mm AutoCannon II
+200mm Light Prototype Automatic Cannon
 200mm Prototype Gauss Gun
 200mm Railgun II
 200mm Reinforced Rolled Tungsten Plates I
@@ -239,6 +240,7 @@ Reactor Control Unit II
 Republic Fleet EMP L
 Republic Fleet EMP M
 Republic Fleet EMP S
+Republic Fleet Firetail
 Republic Fleet Fusion L
 Republic Fleet Fusion M
 Republic Fleet Fusion S
@@ -246,6 +248,8 @@ Republic Fleet Phased Plasma L
 Republic Fleet Phased Plasma M
 Republic Fleet Phased Plasma S
 Republic Fleet Titanium Sabot M
+Rifter
+Rupture
 Sabre
 Scimitar
 Scorpion
@@ -275,6 +279,7 @@ Small Projectile Burst Aerator I
 Small Projectile Collision Accelerator I
 Small Trimark Armor Pump I
 Small Unstable Power Fluctuator I
+Stabber
 Stabber Fleet Issue
 Stasis Webifier II
 Talos
@@ -301,4 +306,5 @@ Warp Disruptor II
 Warp Scrambler II
 Warrior I
 Warrior II
+Wolf
 X5 Prototype Engine Enervator
