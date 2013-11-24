@@ -3,6 +3,8 @@
 'Hypnos' Signal Distortion Amplifier I
 'Refuge' Adaptive Nano Plating I
 'Umbra' White Noise ECM
+'Wetu' Mobile Depot
+'Yurt' Mobile Depot
 10MN Afterburner II
 10MN Microwarpdrive II
 125mm Gatling AutoCannon II
@@ -75,6 +77,7 @@ Celestis
 Centii C-Type Small Remote Capacitor Transmitter
 Centum C-Type Medium Remote Armor Repairer
 Co-Processor II
+Concussion Bomb
 Conjunctive Ladar ECCM Scanning Array I
 Conjunctive Magnetometric ECCM Scanning Array I
 Conjunctive Radar ECCM Scanning Array I
@@ -97,6 +100,7 @@ E500 Prototype Energy Vampire
 EM Ward Amplifier II
 EM Ward Field II
 EMP M
+Electron Bomb 
 Energized Adaptive Nano Membrane II
 Enfeebling Phase Inversion ECM I
 Exequror
@@ -196,6 +200,7 @@ Micro Auxiliary Power Core I
 Micro Auxiliary Power Core II
 Mjolnir Light Missile
 Mjolnir Torpedo
+Mobile Depot
 Mobile Large Warp Disruptor I
 Mobile Large Warp Disruptor II
 Mobile Medium Warp Disruptor I
@@ -252,10 +257,12 @@ Rifter
 Rupture
 Sabre
 Scimitar
+Scorch Bomb
 Scorpion
 Scourge Torpedo
 Scythe
 Sensor Booster II
+Shrapnel Bomb
 Signal Amplifier II
 Signal Distortion Amplifier II
 Slasher
@@ -300,6 +307,7 @@ Valkyrie I
 Valkyrie II
 Vespa EC-600
 Vigil
+Void Bomb
 Void M
 Warp Disrupt Probe
 Warp Disruptor II
