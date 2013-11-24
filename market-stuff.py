@@ -169,8 +169,11 @@ def handle_data(table, xml, hub_xml):
         hub_volume = int(read_xml_field(hub_sell, "volume"))
         hub_min_price = float(read_xml_field(hub_sell, "min"))
         hub_price_fmted = "{:,.2f}".format(hub_min_price)
-        hub_relative = (min_price - hub_min_price) * 100.0 / (hub_min_price)
-        hub_relative_formatted = "{:.1f}%".format(hub_relative)
+
+        hub_relative_formatted = "?"
+        if volume > 0:
+            hub_relative = (min_price - hub_min_price) * 100.0 / (hub_min_price)
+            hub_relative_formatted = "{:.1f}%".format(hub_relative)
 
         row = Row(Item=item.name, Volume=volume, Price=price_fmted, HubVolume=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=market_groups[item.market_group_id].good_name)
         table.append(row)
@@ -199,7 +202,7 @@ def format_table(table):
         classes = []
         if entry.Volume == 0:
             classes.append('market_hole')
-        elif not entry.HubRelative.startswith("0.0"):
+        elif not entry.HubRelative.startswith("?"):
             if entry.HubRelative[0] == '-':
                 classes.append('relative_negative')
             else:
@@ -224,11 +227,18 @@ def html_output(table, system):
 <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 
-// formatted numbers sorting from http://datatables.net/plug-ins/sorting#formatted_numbers
+// formatted numbers sorting based on http://datatables.net/plug-ins/sorting#formatted_numbers
 jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     "formatted-num-pre": function ( a ) {
-        a = (a === "-" || a === "") ? 0 : a.replace( /[^\d\-\.]/g, "" );
-        return parseFloat( a );
+        if (a === "-" || a === "") {
+            return 0;
+        } else if (a === "?") {
+          // Special case for unknowns
+          return Number.POSITIVE_INFINITY;
+        } else {
+          // Replace characters that aren't digits, '-' or '.'.
+          return parseFloat(a.replace(/[^\d\-\.]/g, ""));
+       }
     },
 
     "formatted-num-asc": function ( a, b ) {
@@ -240,15 +250,15 @@ jQuery.extend( jQuery.fn.dataTableExt.oSort, {
     }
 } );
 
-  $(document).ready(function() {
-    $('#market').dataTable( {
-      "aoColumnDefs": [
-        { "sType": "formatted-num", "aTargets": %(numeric_columns)s }
-      ],
-      "bPaginate": false,
-      "bLengthChange": false,
-    } );
+$(document).ready(function() {
+  $('#market').dataTable( {
+    "aoColumnDefs": [
+      { "sType": "formatted-num", "aTargets": %(numeric_columns)s }
+    ],
+    "bPaginate": false,
+    "bLengthChange": false,
   } );
+} );
 </script>
 
 </head><body>
