@@ -5,6 +5,7 @@
     color: red;
 }
 .market_hole td:nth-child(3),
-.market_hole td:nth-child(4) {
+.market_hole td:nth-child(4),
+.market_hole td:nth-last-child(1) {
     color: orange;
 }
