@@ -178,9 +178,9 @@ def handle_data(table, xml, hub_xml):
         row = Row(Item=item.name, Volume=volume, Price=price_fmted, HubVolume=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=market_groups[item.market_group_id].good_name)
         table.append(row)
 
-def text_output(table):
+def text_output(table, system):
     for parts in table:
-        print("%s: %d at %s (%s)" % parts)
+        print(parts)
 
 def make_tag(name, attribs=None):
     if attribs:
