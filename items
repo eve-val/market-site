@@ -38,6 +38,9 @@
 800mm Reinforced Steel Plates II
 Adaptive Invulnerability Field II
 Adaptive Nano Plating II
+Antimatter Charge L
+Antimatter Charge M
+Antimatter Charge S
 Arbitrator
 Armageddon
 Armor Explosive Hardener II
@@ -61,13 +64,20 @@ Caldari Navy Antimatter Charge L
 Caldari Navy Antimatter Charge M
 Caldari Navy Antimatter Charge S
 Caldari Navy Inferno Cruise Missile
+Caldari Navy Inferno Heavy Assault Missile
 Caldari Navy Inferno Light Missile
+Caldari Navy Inferno Rocket
 Caldari Navy Inferno Torpedo
 Caldari Navy Iridium Charge S
 Caldari Navy Mjolnir Light Missile
 Caldari Navy Mjolnir Torpedo
+Caldari Navy Nova Light Missile
+Caldari Navy Nova Rocket
 Caldari Navy Nova Torpedo
+Caldari Navy Scourge Cruise Missile
 Caldari Navy Scourge Heavy Assault Missile
+Caldari Navy Scourge Light Missile
+Caldari Navy Scourge Rocket
 Caldari Navy Scourge Torpedo
 Cap Recharger II
 Capacitor Power Relay II
@@ -99,8 +109,10 @@ E50 Prototype Energy Vampire
 E500 Prototype Energy Vampire
 EM Ward Amplifier II
 EM Ward Field II
+EMP L
 EMP M
-Electron Bomb 
+EMP S
+Electron Bomb
 Energized Adaptive Nano Membrane II
 Enfeebling Phase Inversion ECM I
 Exequror
@@ -139,11 +151,26 @@ Hound
 Huginn
 Imperial Navy Multifrequency L
 Imperial Navy Multifrequency M
+Inferno Cruise Missile
+Inferno Javelin Heavy Assault Missile
+Inferno Rage Heavy Assault Missile
+Inferno Heavy Assault Missile
+Inferno Fury Heavy Missile
+Inferno Heavy Missile
+Inferno Precision Heavy Missile
+Inferno Fury Light Missile
+Inferno Light Missile
+Inferno Precision Light Missile
+Inferno Javelin Rocket
+Inferno Rage Rocket
+Inferno Rocket
 Inferno Torpedo
 Interdiction Sphere Launcher I
 Internal Force Field Array I
 J5 Prototype Warp Disruptor I
 J5b Phased Prototype Warp Scrambler I
+Javelin M
+Javelin S
 Large 'Notos' Explosive Charge I
 Large 'Regard' Remote Capacitor Transmitter
 Large 'Solace' Remote Armor Repairer
@@ -221,6 +248,12 @@ Navy Cap Booster 400
 Navy Cap Booster 800
 Nemesis
 Neutron Blaster Cannon II
+Nova Fury Light Missile
+Nova Javelin Rocket
+Nova Light Missile
+Nova Precision Light Missile
+Nova Rage Rocket
+Nova Rocket
 Nova Torpedo
 Null L
 Oneiros
@@ -229,6 +262,9 @@ Optimal Range Disruption Script
 Optimal Range Script
 Oracle
 Phased Muon Sensor Disruptor I
+Phased Plasma L
+Phased Plasma M
+Phased Plasma S
 Phased Weapon Navigation Array Generation Extron
 Pithi A-Type Small Remote Shield Booster
 Power Diagnostic System II
@@ -259,6 +295,19 @@ Sabre
 Scimitar
 Scorch Bomb
 Scorpion
+Scourge Cruise Missile
+Scourge Fury Heavy Missile
+Scourge Fury Light Missile
+Scourge Heavy Assault Missile
+Scourge Heavy Missile
+Scourge Javelin Heavy Assault Missile
+Scourge Javelin Rocket
+Scourge Light Missile
+Scourge Precision Heavy Missile
+Scourge Precision Light Missile
+Scourge Rage Heavy Assault Missile
+Scourge Rage Rocket
+Scourge Rocket
 Scourge Torpedo
 Scythe
 Sensor Booster II
@@ -286,6 +335,8 @@ Small Projectile Burst Aerator I
 Small Projectile Collision Accelerator I
 Small Trimark Armor Pump I
 Small Unstable Power Fluctuator I
+Spike M
+Spike S
 Stabber
 Stabber Fleet Issue
 Stasis Webifier II

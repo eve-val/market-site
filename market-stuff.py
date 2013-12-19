@@ -178,9 +178,9 @@ def handle_data(table, xml, hub_xml):
         row = Row(Item=item.name, Volume=volume, Price=price_fmted, HubVolume=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=market_groups[item.market_group_id].good_name)
         table.append(row)
 
-def text_output(table):
+def text_output(table, system):
     for parts in table:
-        print("%s: %d at %s (%s)" % parts)
+        print(parts)
 
 def make_tag(name, attribs=None):
     if attribs:
@@ -277,6 +277,8 @@ at that time.</em><br>
 %(table)s
 </tbody></table></body></html>"""
 
+    f = open(system + ".html", "w")
+
     print(page_template % {
         'system': system,
         'numeric_columns': [index for index, column in enumerate(column_properties.values()) if column.is_numeric],
@@ -284,7 +286,9 @@ at that time.</em><br>
         'timestamp': email.utils.formatdate(usegmt=True),
         'data_age': EVECENTRAL_HOURS,
         'table': format_table(table),
-        })
+        },
+          file = f)
+    f.close()
 
 def make_table(formatter, system):
     item_names = [s.strip() for s in open(ITEM_LIST)]
@@ -306,10 +310,14 @@ def make_table(formatter, system):
 
     formatter(table, system)
 
+def make_tables(formatter, systems):
+    for system in systems:
+        make_table(formatter, system)
+
 def make_poller():
     item_names = [s.strip() for s in open(ITEM_LIST)]
     item_ids = [name2item[name].id for name in item_names]
-    print("item_ids = %s;" % str(item_ids))
+    print("item_ids = %s;" % str(item_ids), file=open("id_list.js", "w"))
 
 def filter_input():
     for name in sys.stdin:
@@ -326,11 +334,12 @@ def main(args):
     elif len(args) > 1 and args[1] == "--poller":
         make_poller()
     elif len(args) > 2 and args[1] == "--text":
-        make_table(text_output, args[2])
+        make_tables(text_output, args[2:])
     elif len(args) > 1:
-        make_table(html_output, args[1])
+        make_tables(html_output, args[1:])
+        make_poller()
     else:
-        sys.stderr.write("usage: %s --filter | --poller | --text SYSTEM | SYSTEM\n" % args[0])
+        sys.stderr.write("usage: %s --filter | --text SYSTEMS | SYSTEMS\n" % args[0])
         return 1
 
 if __name__ == '__main__':
