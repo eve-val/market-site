@@ -3,12 +3,12 @@
 'Hypnos' Signal Distortion Amplifier I
 'Refuge' Adaptive Nano Plating I
 'Umbra' White Noise ECM
-'Wetu' Mobile Depot
-'Yurt' Mobile Depot
 10MN Afterburner II
 10MN Microwarpdrive II
+125mm Light Prototype Automatic Cannon
 125mm Gatling AutoCannon II
 1400mm Prototype Siege Cannon
+150mm Light Prototype Automatic Cannon
 150mm Light AutoCannon II
 150mm Prototype Gauss Gun
 150mm Railgun II
@@ -38,10 +38,10 @@
 800mm Reinforced Steel Plates II
 Adaptive Invulnerability Field II
 Adaptive Nano Plating II
+Anode Ion Particle Cannon I
 Antimatter Charge L
 Antimatter Charge M
 Antimatter Charge S
-Arbitrator
 Armageddon
 Armor Explosive Hardener II
 Armor Kinetic Hardener II
@@ -53,6 +53,7 @@ Balmer Series Tracking Disruptor I
 Barrage M
 Barrage S
 Bellicose
+Bestower
 Beta Reactor Control: Capacitor Power Relay I
 Blackbird
 Bomb Launcher I
@@ -96,7 +97,7 @@ Counterbalanced Weapon Mounts I
 Covert Ops Cloaking Device II
 Curator I
 Curator II
-Curse
+Damage Control I
 Damage Control II
 Drake
 Drone Damage Amplifier II
@@ -106,6 +107,8 @@ Dual 180mm Prototype Automatic Cannon
 E5 Prototype Energy Vampire
 E50 Prototype Energy Vampire
 E500 Prototype Energy Vampire
+ECCM - Ladar II
+ECCM - Radar II
 EM Ward Amplifier II
 EM Ward Field II
 EMP L
@@ -114,7 +117,10 @@ EMP S
 Electron Bomb
 Energized Adaptive Nano Membrane II
 Enfeebling Phase Inversion ECM I
+Epithal
 Exequror
+Expanded Cargohold I
+Expanded Cargohold II
 Experimental 10MN Afterburner I
 Experimental 10MN Microwarpdrive I
 F-90 Positional Sensor Subroutines
@@ -124,9 +130,11 @@ Fleeting Propulsion Inhibitor I
 Flycatcher
 Focused Warp Disruption Script
 Fourier Transform Tracking Program
+Gauss Field Balancer I
 Gallente Fuel Block
 Garde I
 Garde II
+Gnosis
 Griffin
 Guardian
 Gyrostabilizer II
@@ -134,7 +142,6 @@ Hail M
 Hail S
 Hammerhead I
 Hammerhead II
-Harbinger
 Heat Sink II
 Heavy Assault Missile Launcher II
 Heavy Capacitor Booster II
@@ -169,6 +176,7 @@ Inferno Torpedo
 Inherent Implants 'Squire' Engineering EG-601
 Interdiction Sphere Launcher I
 Internal Force Field Array I
+Iteron Mark V
 J5 Prototype Warp Disruptor I
 J5b Phased Prototype Warp Scrambler I
 Javelin M
@@ -187,17 +195,20 @@ Large Particle Dispersion Projector I
 Large S95a Remote Shield Booster
 Large Shield Extender II
 Large Trimark Armor Pump I
+Large YF-12a Smartbomb
 Light Ion Blaster II
 Light Neutron Blaster II
 Light Shield Maintenance Bot I
 Limited 1MN Microwarpdrive I
 Limited Adaptive Invulnerability Field I
 Magnetic Field Stabilizer II
+Mammoth
 Manticore
 Medium 'Knave' Energy Drain
 Medium 'Solace' Remote Armor Repairer
 Medium 'Vehemence' Shockwave Charge
 Medium Ancillary Current Router I
+Medium Ancillary Current Router II
 Medium Anti-EM Screen Reinforcer I
 Medium Anti-Explosive Pump I
 Medium Anti-Kinetic Pump I
@@ -216,6 +227,7 @@ Medium F-S9 Regolith Shield Induction
 Medium Particle Dispersion Augmentor I
 Medium Particle Dispersion Projector I
 Medium Polycarbon Engine Housing I
+Medium Processor Overclocking Unit I
 Medium Projectile Burst Aerator I
 Medium Projectile Collision Accelerator I
 Medium Remote Armor Repairer II
@@ -224,6 +236,7 @@ Medium S95a Remote Shield Booster
 Medium Shield Extender II
 Medium Shield Maintenance Bot I
 Medium Trimark Armor Pump I
+Medium Unstable Power Fluctuator I
 Mega Pulse Laser II
 Micro Auxiliary Power Core I
 Micro Auxiliary Power Core II
@@ -250,6 +263,7 @@ Navy Cap Booster 200
 Navy Cap Booster 400
 Navy Cap Booster 800
 Nemesis
+Nereus
 Neutron Blaster Cannon II
 Nova Fury Light Missile
 Nova Javelin Rocket
@@ -259,6 +273,8 @@ Nova Rage Rocket
 Nova Rocket
 Nova Torpedo
 Null L
+Omnidirectional Tracking Link I
+Omnidirectional Tracking Link II
 Oneiros
 Optical Tracking Computer I
 Optimal Range Disruption Script
@@ -302,7 +318,6 @@ Scan Resolution Dampening Script
 Scan Resolution Script
 Scimitar
 Scorch Bomb
-Scorpion
 Scourge Cruise Missile
 Scourge Fury Heavy Missile
 Scourge Fury Light Missile
@@ -328,12 +343,14 @@ Small 'Vehemence' Shockwave Charge
 Small Ancillary Current Router I
 Small Anti-EM Screen Reinforcer I
 Small Anti-Explosive Pump I
+Small Anti-Kinetic Screen Reinforcer I
 Small Anti-Thermal Screen Reinforcer I
 Small Armor Repairer II
 Small Capacitor Booster II
 Small Egress Port Maximizer I
 Small Hybrid Collision Accelerator I
 Small Hybrid Metastasis Adjuster I
+Small Hydraulic Bay Thrusters I
 Small Ionic Field Projector I
 Small Particle Dispersion Augmentor I
 Small Particle Dispersion Projector I
@@ -341,6 +358,7 @@ Small Polycarbon Engine Housing I
 Small Processor Overclocking Unit I
 Small Projectile Burst Aerator I
 Small Projectile Collision Accelerator I
+Small Targeting System Subcontroller I
 Small Trimark Armor Pump I
 Small Unstable Power Fluctuator I
 Spike M
@@ -348,9 +366,10 @@ Spike S
 Stabber
 Stabber Fleet Issue
 Stasis Webifier II
-Talos
+Talwar
 Targeting Range Dampening Script
 Targeting Range Script
+Tayra
 Thermic Dissipation Field II
 Thorax
 Tracking Computer II
@@ -358,10 +377,12 @@ Tracking Enhancer II
 Tracking Speed Disruption Script
 Tracking Speed Script
 True Sansha Armor EM Hardener
+True Sansha Armor Kinetic Hardener
 True Sansha Energized Explosive Membrane
 True Sansha Small EMP Smartbomb
 Type-D Attenuation Signal Augmentation
 Typhoon
+Upgraded 'Malkuth' Light Missile Launcher
 Upgraded 'Malkuth' Rapid Light Missile Launcher
 Valkyrie I
 Valkyrie II
@@ -369,6 +390,8 @@ Vespa EC-600
 Vigil
 Void Bomb
 Void M
+Warden I
+Warden II
 Warp Disrupt Probe
 Warp Disruptor II
 Warp Scrambler II
