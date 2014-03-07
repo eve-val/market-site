@@ -5,11 +5,11 @@
 'Umbra' White Noise ECM
 10MN Afterburner II
 10MN Microwarpdrive II
-125mm Light Prototype Automatic Cannon
 125mm Gatling AutoCannon II
+125mm Light Prototype Automatic Cannon
 1400mm Prototype Siege Cannon
-150mm Light Prototype Automatic Cannon
 150mm Light AutoCannon II
+150mm Light Prototype Automatic Cannon
 150mm Prototype Gauss Gun
 150mm Railgun II
 1600mm Reinforced Rolled Tungsten Plates I
@@ -38,6 +38,7 @@
 800mm Reinforced Steel Plates II
 Adaptive Invulnerability Field II
 Adaptive Nano Plating II
+Algos
 Anode Ion Particle Cannon I
 Antimatter Charge L
 Antimatter Charge M
@@ -87,18 +88,22 @@ Celestis
 Centii C-Type Small Remote Capacitor Transmitter
 Centum C-Type Medium Remote Armor Repairer
 Co-Processor II
+Coercer
 Concussion Bomb
 Conjunctive Ladar ECCM Scanning Array I
 Conjunctive Magnetometric ECCM Scanning Array I
 Conjunctive Radar ECCM Scanning Array I
+Corax
 Corelum C-Type Medium Remote Armor Repairer
 Cormorant
 Counterbalanced Weapon Mounts I
 Covert Ops Cloaking Device II
 Curator I
 Curator II
+DDO Photometry Tracking Disruptor I
 Damage Control I
 Damage Control II
+Dragoon
 Drake
 Drone Damage Amplifier II
 Drone Link Augmentor I
@@ -130,10 +135,10 @@ Fleeting Propulsion Inhibitor I
 Flycatcher
 Focused Warp Disruption Script
 Fourier Transform Tracking Program
-Gauss Field Balancer I
 Gallente Fuel Block
 Garde I
 Garde II
+Gauss Field Balancer I
 Gnosis
 Griffin
 Guardian
@@ -243,6 +248,7 @@ Micro Auxiliary Power Core II
 Minmatar Fuel Block
 Mjolnir Light Missile
 Mjolnir Torpedo
+Moa
 Mobile Depot
 Mobile Large Warp Disruptor I
 Mobile Large Warp Disruptor II
@@ -366,13 +372,16 @@ Spike S
 Stabber
 Stabber Fleet Issue
 Stasis Webifier II
+Stiletto
 Talwar
 Targeting Range Dampening Script
 Targeting Range Script
 Tayra
 Thermic Dissipation Field II
 Thorax
+Thrasher
 Tracking Computer II
+Tracking Disruptor II
 Tracking Enhancer II
 Tracking Speed Disruption Script
 Tracking Speed Script
