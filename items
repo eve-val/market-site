@@ -36,6 +36,8 @@
 720mm Prototype Siege Cannon
 800mm Reinforced Rolled Tungsten Plates I
 800mm Reinforced Steel Plates II
+Acolyte I
+Acolyte II
 Adaptive Invulnerability Field II
 Adaptive Nano Plating II
 Algos
@@ -54,8 +56,11 @@ Balmer Series Tracking Disruptor I
 Barrage M
 Barrage S
 Bellicose
+Berserker I
+Berserker II
 Bestower
 Beta Reactor Control: Capacitor Power Relay I
+Beta Reactor Control: Shield Power Relay I
 Blackbird
 Bomb Launcher I
 Bouncer I
@@ -70,6 +75,7 @@ Caldari Navy Inferno Light Missile
 Caldari Navy Inferno Rocket
 Caldari Navy Inferno Torpedo
 Caldari Navy Iridium Charge S
+Caldari Navy Mjolnir Heavy Missile
 Caldari Navy Mjolnir Light Missile
 Caldari Navy Mjolnir Torpedo
 Caldari Navy Nova Light Missile
@@ -90,6 +96,9 @@ Centum C-Type Medium Remote Armor Repairer
 Co-Processor II
 Coercer
 Concussion Bomb
+Conflagration L
+Conflagration M
+Conflagration S
 Conjunctive Ladar ECCM Scanning Array I
 Conjunctive Magnetometric ECCM Scanning Array I
 Conjunctive Radar ECCM Scanning Array I
@@ -103,6 +112,8 @@ Curator II
 DDO Photometry Tracking Disruptor I
 Damage Control I
 Damage Control II
+Data Analyzer I
+Data Analyzer II
 Dragoon
 Drake
 Drone Damage Amplifier II
@@ -149,6 +160,7 @@ Hammerhead I
 Hammerhead II
 Heat Sink II
 Heavy Assault Missile Launcher II
+Heavy Beam Laser II
 Heavy Capacitor Booster II
 Heavy Electrochemical Capacitor Booster I
 Heavy Electron Blaster II
@@ -164,6 +176,7 @@ Hound
 Huginn
 Imperial Navy Multifrequency L
 Imperial Navy Multifrequency M
+Imperial Navy Multifrequency S
 Inferno Cruise Missile
 Inferno Fury Heavy Missile
 Inferno Fury Light Missile
@@ -178,6 +191,8 @@ Inferno Rage Heavy Assault Missile
 Inferno Rage Rocket
 Inferno Rocket
 Inferno Torpedo
+Infiltrator I
+Infiltrator II
 Inherent Implants 'Squire' Engineering EG-601
 Interdiction Sphere Launcher I
 Internal Force Field Array I
@@ -191,6 +206,9 @@ Large 'Notos' Explosive Charge I
 Large 'Regard' Remote Capacitor Transmitter
 Large 'Solace' Remote Armor Repairer
 Large 'Vehemence' Shockwave Charge
+Large Ancillary Armor Repairer
+Large Ancillary Current Router I
+Large Ancillary Shield Booster
 Large Anti-Explosive Pump I
 Large Bay Loading Accelerator I
 Large Capacitor Control Circuit I
@@ -213,8 +231,10 @@ Manticore
 Medium 'Knave' Energy Drain
 Medium 'Solace' Remote Armor Repairer
 Medium 'Vehemence' Shockwave Charge
+Medium Ancillary Armor Repairer
 Medium Ancillary Current Router I
 Medium Ancillary Current Router II
+Medium Ancillary Shield Booster
 Medium Anti-EM Screen Reinforcer I
 Medium Anti-Explosive Pump I
 Medium Anti-Kinetic Pump I
@@ -249,7 +269,13 @@ Mexallon
 Micro Auxiliary Power Core I
 Micro Auxiliary Power Core II
 Minmatar Fuel Block
+Mjolnir Fury Heavy Missile
+Mjolnir Heavy Assault Missile
+Mjolnir Heavy Missile
+Mjolnir Javelin Heavy Assault Missile
 Mjolnir Light Missile
+Mjolnir Precision Heavy Missile
+Mjolnir Rage Heavy Assault Missile
 Mjolnir Torpedo
 Moa
 Mobile Depot
@@ -269,8 +295,10 @@ Modal Neutron Particle Accelerator I
 Morphite
 Nanite Repair Paste
 Nanofiber Internal Structure II
+Navy Cap Booster 150
 Navy Cap Booster 200
 Navy Cap Booster 400
+Navy Cap Booster 50
 Navy Cap Booster 800
 Nemesis
 Nereus
@@ -284,6 +312,8 @@ Nova Rage Rocket
 Nova Rocket
 Nova Torpedo
 Null L
+Ogre I
+Ogre II
 Omnidirectional Tracking Link I
 Omnidirectional Tracking Link II
 Oneiros
@@ -298,6 +328,8 @@ Phased Plasma S
 Phased Weapon Navigation Array Generation Extron
 Pithi A-Type Small Remote Shield Booster
 Power Diagnostic System II
+Praetor I
+Praetor II
 Prototype 'Arbalest' Heavy Assault Missile Launcher I
 Prototype 'Arbalest' Torpedo Launcher
 Prototype 100MN Microwarpdrive I
@@ -310,6 +342,8 @@ Rapid Light Missile Launcher II
 Reactive Armor Hardener
 Reactor Control Unit I
 Reactor Control Unit II
+Relic Analyzer I
+Relic Analyzer II
 Republic Fleet Depleted Uranium S
 Republic Fleet EMP L
 Republic Fleet EMP M
@@ -330,6 +364,9 @@ Scan Resolution Dampening Script
 Scan Resolution Script
 Scimitar
 Scorch Bomb
+Scorch L
+Scorch M
+Scorch S
 Scourge Cruise Missile
 Scourge Fury Heavy Missile
 Scourge Fury Light Missile
@@ -346,12 +383,14 @@ Scourge Rocket
 Scourge Torpedo
 Scythe
 Sensor Booster II
+Shield Power Relay II
 Shrapnel Bomb
 Signal Amplifier II
 Signal Distortion Amplifier II
 Slasher
 Small 'Knave' Energy Drain
 Small 'Vehemence' Shockwave Charge
+Small Ancillary Armor Repairer
 Small Ancillary Current Router I
 Small Anti-EM Screen Reinforcer I
 Small Anti-Explosive Pump I
@@ -360,6 +399,7 @@ Small Anti-Thermal Screen Reinforcer I
 Small Armor Repairer II
 Small Capacitor Booster II
 Small Egress Port Maximizer I
+Small Focused Pulse Laser II
 Small Hybrid Collision Accelerator I
 Small Hybrid Metastasis Adjuster I
 Small Hydraulic Bay Thrusters I
@@ -415,6 +455,7 @@ Warp Scrambler II
 Warrior I
 Warrior II
 Wolf
+X-Large Ancillary Shield Booster
 X5 Prototype Engine Enervator
 Zainou 'Gypsy' Electronics EE-601
 Zydrine
