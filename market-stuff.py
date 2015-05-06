@@ -264,7 +264,7 @@ $(document).ready(function() {
 </head><body>
 <p>Data may be out of date or missing. Items might be in the wrong station. Price shown is the lowest price. If you want more items on here, message sully on IRC with links to lists of items (probably pastebinned).
 <p><strong>Want to help out and keep this up-to-date?
-Run the <a href="/poller">poller</a> while ship-spinning in Catch!</strong>
+Run the <a href="/poller">poller</a> while ship-spinning in Fountain!</strong>
 
 <h1>%(system)s market</h1>
 <em>Last updated %(timestamp)s [EVE time], from
