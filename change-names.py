@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Script to update the items list from old names of items to new ones
+# when they change.
+
 import sys
 import sqlite3
 
@@ -10,6 +13,7 @@ def load_items(name):
     id2name = {}
 
     conn = sqlite3.connect(name)
+    conn.text_factory = lambda x: str(x, 'latin1') # ASDF
     c = conn.cursor()
     c.execute("SELECT typeId, typeName from invTypes")
 
@@ -20,8 +24,12 @@ def load_items(name):
     return (name2id, id2name)
 
 def main(args):
-    name2id, _ = load_items('ody101-sqlite3-v12.db')
-    _, id2name = load_items('ody110-sqlite3-v1.db')
+    if len(args) != 3:
+        print("usage: change-names.py <old-db> <new-db>")
+        return 1
+
+    name2id, _ = load_items(args[1])
+    _, id2name = load_items(args[2])
 
     item_names = [s.strip() for s in open(ITEM_LIST)]
     for name in item_names:

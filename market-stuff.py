@@ -49,6 +49,7 @@ market_group_useful_names = {}
 conn = None
 try:
     conn = sqlite3.connect('eve-dump.db')
+    conn.text_factory = lambda x: str(x, 'latin1') # ASDF
     cursor = conn.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
     if len(cursor.fetchall()) == 0:
@@ -175,7 +176,10 @@ def handle_data(table, xml, hub_xml):
             hub_relative = (min_price - hub_min_price) * 100.0 / (hub_min_price)
             hub_relative_formatted = "{:.1f}%".format(hub_relative)
 
-        row = Row(Item=item.name, Volume=volume, Price=price_fmted, HubVolume=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=market_groups[item.market_group_id].good_name)
+        group_name = (market_groups[item.market_group_id].good_name
+                      if item.market_group_id else "WTF")
+
+        row = Row(Item=item.name, Volume=volume, Price=price_fmted, HubVolume=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=group_name)
         table.append(row)
 
 def text_output(table, system):
