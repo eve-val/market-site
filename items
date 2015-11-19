@@ -4,7 +4,7 @@
 'Refuge' Adaptive Nano Plating I
 'Umbra' White Noise ECM
 10MN Afterburner II
-10MN Microwarpdrive II
+10MN Monopropellant Enduring Afterburner
 125mm Gatling AutoCannon II
 125mm Light Prototype Automatic Cannon
 1400mm Prototype Siege Cannon
@@ -12,30 +12,34 @@
 150mm Light Prototype Automatic Cannon
 150mm Prototype Gauss Gun
 150mm Railgun II
-1600mm Reinforced Rolled Tungsten Plates I
-1600mm Reinforced Steel Plates II
+1600mm Rolled Tungsten Compact Plates
+1600mm Steel Plates II
 1MN Afterburner II
 200mm AutoCannon II
 200mm Light Prototype Automatic Cannon
 200mm Prototype Gauss Gun
 200mm Railgun II
-200mm Reinforced Rolled Tungsten Plates I
+200mm Rolled Tungsten Compact Plates
 220mm Vulcan AutoCannon II
 250mm Prototype Gauss Gun
 250mm Railgun II
-400mm Reinforced Rolled Tungsten Plates I
+400mm Rolled Tungsten Compact Plates
 425mm AutoCannon II
 425mm Medium 'Scout' Autocannon I
 425mm Medium Prototype Automatic Cannon
+500MN Cold-Gas Enduring Microwarpdrive
+50MN Cold-Gas Enduring Microwarpdrive
+50MN Microwarpdrive II
 50W Infectious Power System Malfunction
+5MN Y-T8 Compact Microwarpdrive
 5W Infectious Power System Malfunction
 650mm Artillery Cannon II
 650mm Medium 'Scout' Artillery I
 720mm 'Scout' Artillery I
 720mm Howitzer Artillery II
 720mm Prototype Siege Cannon
-800mm Reinforced Rolled Tungsten Plates I
-800mm Reinforced Steel Plates II
+800mm Rolled Tungsten Compact Plates
+800mm Steel Plates II
 Acolyte I
 Acolyte II
 Adaptive Invulnerability Field II
@@ -45,10 +49,11 @@ Anode Ion Particle Cannon I
 Antimatter Charge L
 Antimatter Charge M
 Antimatter Charge S
+Arbalest Compact Light Missile Launcher
 Armageddon
 Armor Explosive Hardener II
 Armor Kinetic Hardener II
-Armor Thermic Hardener II
+Armor Thermal Hardener II
 Augoror
 BZ-5 Neutralizing Spatial Destabilizer ECM
 Ballistic Control System II
@@ -59,7 +64,6 @@ Bellicose
 Berserker I
 Berserker II
 Bestower
-Beta Reactor Control: Capacitor Power Relay I
 Beta Reactor Control: Shield Power Relay I
 Blackbird
 Bomb Launcher I
@@ -137,8 +141,6 @@ Epithal
 Exequror
 Expanded Cargohold I
 Expanded Cargohold II
-Experimental 10MN Afterburner I
-Experimental 10MN Microwarpdrive I
 F-90 Positional Sensor Subroutines
 Faint Epsilon Warp Scrambler I
 Faint Warp Disruptor I
@@ -193,7 +195,7 @@ Inferno Rocket
 Inferno Torpedo
 Infiltrator I
 Infiltrator II
-Inherent Implants 'Squire' Engineering EG-601
+Inherent Implants 'Squire' Power Grid Management EG-601
 Interdiction Sphere Launcher I
 Internal Force Field Array I
 Isogen
@@ -212,7 +214,7 @@ Large Ancillary Shield Booster
 Large Anti-Explosive Pump I
 Large Bay Loading Accelerator I
 Large Capacitor Control Circuit I
-Large F-S9 Regolith Shield Induction
+Large F-S9 Regolith Compact Shield Extender
 Large Hydraulic Bay Thrusters I
 Large Micro Jump Drive
 Large Particle Dispersion Projector I
@@ -223,11 +225,11 @@ Large YF-12a Smartbomb
 Light Ion Blaster II
 Light Neutron Blaster II
 Light Shield Maintenance Bot I
-Limited 1MN Microwarpdrive I
 Limited Adaptive Invulnerability Field I
 Magnetic Field Stabilizer II
 Mammoth
 Manticore
+Mark I Compact Capacitor Power Relay
 Medium 'Knave' Energy Drain
 Medium 'Solace' Remote Armor Repairer
 Medium 'Vehemence' Shockwave Charge
@@ -243,13 +245,13 @@ Medium Anti-Thermal Screen Reinforcer I
 Medium Armor Maintenance Bot I
 Medium Armor Repairer II
 Medium Auxiliary Thrusters I
-Medium Azeotropic Ward Salubrity I
+Medium Azeotropic Restrained Shield Extender
 Medium Bay Loading Accelerator I
 Medium Capacitor Control Circuit I
 Medium Core Defense Field Extender I
 Medium Egress Port Maximizer I
 Medium Electrochemical Capacitor Booster I
-Medium F-S9 Regolith Shield Induction
+Medium F-S9 Regolith Compact Shield Extender
 Medium Particle Dispersion Augmentor I
 Medium Particle Dispersion Projector I
 Medium Polycarbon Engine Housing I
@@ -332,7 +334,6 @@ Praetor I
 Praetor II
 Prototype 'Arbalest' Heavy Assault Missile Launcher I
 Prototype 'Arbalest' Torpedo Launcher
-Prototype 100MN Microwarpdrive I
 Prototype Cloaking Device I
 Pseudoelectron Containment Field I
 Purifier
@@ -423,7 +424,7 @@ Talwar
 Targeting Range Dampening Script
 Targeting Range Script
 Tayra
-Thermic Dissipation Field II
+Thermal Dissipation Field II
 Thorax
 Thrasher
 Tracking Computer II
@@ -438,7 +439,6 @@ True Sansha Energized Explosive Membrane
 True Sansha Small EMP Smartbomb
 Type-D Attenuation Signal Augmentation
 Typhoon
-Upgraded 'Malkuth' Light Missile Launcher
 Upgraded 'Malkuth' Rapid Light Missile Launcher
 Valkyrie I
 Valkyrie II
@@ -457,5 +457,5 @@ Warrior II
 Wolf
 X-Large Ancillary Shield Booster
 X5 Prototype Engine Enervator
-Zainou 'Gypsy' Electronics EE-601
+Zainou 'Gypsy' CPU Management EE-601
 Zydrine
