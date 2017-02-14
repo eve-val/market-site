@@ -1,8 +1,8 @@
 'Arbalest' Cruise Launcher I
-'Hypnos' Ion Field ECM I
+Hypnos Scoped Magnetometric ECM
 'Hypnos' Signal Distortion Amplifier I
 'Refuge' Adaptive Nano Plating I
-'Umbra' White Noise ECM
+Umbra Scoped Radar ECM
 10MN Afterburner II
 10MN Monopropellant Enduring Afterburner
 125mm Gatling AutoCannon II
@@ -30,9 +30,9 @@
 500MN Cold-Gas Enduring Microwarpdrive
 50MN Cold-Gas Enduring Microwarpdrive
 50MN Microwarpdrive II
-50W Infectious Power System Malfunction
+Medium Infectious Scoped Energy Neutralizer
 5MN Y-T8 Compact Microwarpdrive
-5W Infectious Power System Malfunction
+Small Infectious Scoped Energy Neutralizer
 650mm Artillery Cannon II
 650mm Medium 'Scout' Artillery I
 720mm 'Scout' Artillery I
@@ -55,9 +55,9 @@ Armor Explosive Hardener II
 Armor Kinetic Hardener II
 Armor Thermal Hardener II
 Augoror
-BZ-5 Neutralizing Spatial Destabilizer ECM
+BZ-5 Scoped Gravimetric ECM
 Ballistic Control System II
-Balmer Series Tracking Disruptor I
+Balmer Series Compact Tracking Disruptor I
 Barrage M
 Barrage S
 Bellicose
@@ -109,11 +109,11 @@ Conjunctive Radar ECCM Scanning Array I
 Corax
 Corelum C-Type Medium Remote Armor Repairer
 Cormorant
-Counterbalanced Weapon Mounts I
+Counterbalanced Compact Gyrostabilizer
 Covert Ops Cloaking Device II
 Curator I
 Curator II
-DDO Photometry Tracking Disruptor I
+DDO Scoped Tracking Disruptor I
 Damage Control I
 Damage Control II
 Data Analyzer I
@@ -136,19 +136,19 @@ EMP M
 EMP S
 Electron Bomb
 Energized Adaptive Nano Membrane II
-Enfeebling Phase Inversion ECM I
+Enfeebling Scoped Ladar ECM
 Epithal
 Exequror
 Expanded Cargohold I
 Expanded Cargohold II
-F-90 Positional Sensor Subroutines
-Faint Epsilon Warp Scrambler I
-Faint Warp Disruptor I
-Fleeting Propulsion Inhibitor I
+F-90 Compact Sensor Booster
+Faint Epsilon Scoped Warp Scrambler
+Faint Scoped Warp Disruptor
+Fleeting Compact Stasis Webifier
 Flycatcher
 Focused Warp Disruption Script
-Fourier Transform Tracking Program
-Gallente Fuel Block
+Fourier Compact Tracking Enhancer
+Oxygen Fuel Block
 Garde I
 Garde II
 Gauss Field Balancer I
@@ -197,16 +197,16 @@ Infiltrator I
 Infiltrator II
 Inherent Implants 'Squire' Power Grid Management EG-601
 Interdiction Sphere Launcher I
-Internal Force Field Array I
+IFFA Compact Damage Control
 Isogen
 Iteron Mark V
-J5 Prototype Warp Disruptor I
-J5b Phased Prototype Warp Scrambler I
+J5 Enduring Warp Disruptor
+J5b Enduring Warp Scrambler
 Javelin M
 Javelin S
 Large 'Notos' Explosive Charge I
 Large 'Regard' Remote Capacitor Transmitter
-Large 'Solace' Remote Armor Repairer
+Large Solace Scoped Remote Armor Repairer
 Large 'Vehemence' Shockwave Charge
 Large Ancillary Armor Repairer
 Large Ancillary Current Router I
@@ -218,7 +218,7 @@ Large F-S9 Regolith Compact Shield Extender
 Large Hydraulic Bay Thrusters I
 Large Micro Jump Drive
 Large Particle Dispersion Projector I
-Large S95a Remote Shield Booster
+Large S95a Scoped Remote Shield Booster
 Large Shield Extender II
 Large Trimark Armor Pump I
 Large YF-12a Smartbomb
@@ -230,8 +230,8 @@ Magnetic Field Stabilizer II
 Mammoth
 Manticore
 Mark I Compact Capacitor Power Relay
-Medium 'Knave' Energy Drain
-Medium 'Solace' Remote Armor Repairer
+Medium Knave Scoped Energy Nosferatu
+Medium Solace Scoped Remote Armor Repairer
 Medium 'Vehemence' Shockwave Charge
 Medium Ancillary Armor Repairer
 Medium Ancillary Current Router I
@@ -260,7 +260,7 @@ Medium Projectile Burst Aerator I
 Medium Projectile Collision Accelerator I
 Medium Remote Armor Repairer II
 Medium Remote Repair Augmentor I
-Medium S95a Remote Shield Booster
+Medium S95a Scoped Remote Shield Booster
 Medium Shield Extender II
 Medium Shield Maintenance Bot I
 Medium Trimark Armor Pump I
@@ -270,7 +270,7 @@ Megacyte
 Mexallon
 Micro Auxiliary Power Core I
 Micro Auxiliary Power Core II
-Minmatar Fuel Block
+Hydrogen Fuel Block
 Mjolnir Fury Heavy Missile
 Mjolnir Heavy Assault Missile
 Mjolnir Heavy Missile
@@ -319,15 +319,15 @@ Ogre II
 Omnidirectional Tracking Link I
 Omnidirectional Tracking Link II
 Oneiros
-Optical Tracking Computer I
+Optical Compact Tracking Computer
 Optimal Range Disruption Script
 Optimal Range Script
 Oracle
-Phased Muon Sensor Disruptor I
+Phased Muon Scoped Sensor Dampener
 Phased Plasma L
 Phased Plasma M
 Phased Plasma S
-Phased Weapon Navigation Array Generation Extron
+Phased Scoped Target Painter
 Pithi A-Type Small Remote Shield Booster
 Power Diagnostic System II
 Praetor I
@@ -389,7 +389,7 @@ Shrapnel Bomb
 Signal Amplifier II
 Signal Distortion Amplifier II
 Slasher
-Small 'Knave' Energy Drain
+Small Knave Scoped Energy Nosferatu
 Small 'Vehemence' Shockwave Charge
 Small Ancillary Armor Repairer
 Small Ancillary Current Router I
@@ -456,6 +456,6 @@ Warrior I
 Warrior II
 Wolf
 X-Large Ancillary Shield Booster
-X5 Prototype Engine Enervator
+X5 Enduring Stasis Webifier
 Zainou 'Gypsy' CPU Management EE-601
 Zydrine
