@@ -321,6 +321,11 @@ def make_table(formatter, system):
         if system_id:
             data += summarize_xml(download_data(part, system_id))
         hub_data += summarize_xml(download_data(part, hub_system_id))
+    # if it is a citadel, get the data from there!
+    if not system_id:
+        orders = esi_load.summarizeOrders(esi_load.getOrders(int(system)))
+        data = [(id, orders[id]) for id in item_ids]
+
     table = handle_data(data, hub_data)
 
     formatter(table, system)
