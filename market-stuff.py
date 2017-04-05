@@ -62,7 +62,8 @@ except Exception as e:
 def get_system_id(name):
     c = conn.cursor()
     c.execute("SELECT itemID from invnames where itemName = ?", (name,))
-    return c.fetchone()[0]
+    row = c.fetchone()
+    return row[0] if row else None
 
 def load_items():
     c = conn.cursor()
@@ -153,23 +154,28 @@ def chunk(l, size):
 def read_xml_field(node, key):
     return node.getElementsByTagName(key)[0].childNodes[0].data
 
-def handle_data(table, xml, hub_xml):
+def summarize_xml(xml):
+    l = []
     items = xml.getElementsByTagName("type")
-    hub_iter = iter(hub_xml.getElementsByTagName("type"))
     for item_report in items:
-        i = int(item_report.getAttribute("id"))
-        item = id2item[i]
-
+        id = int(item_report.getAttribute("id"))
         sell = item_report.getElementsByTagName("sell")[0]
         volume = int(read_xml_field(sell, "volume"))
         min_price = float(read_xml_field(sell, "min"))
-        price_fmted = "{:,.2f}".format(min_price)
+        l += [(id, (min_price, volume))]
+    return l
 
-        hub_item = next(hub_iter)
-        assert int(hub_item.getAttribute("id")) == i
-        hub_sell = hub_item.getElementsByTagName("sell")[0]
-        hub_volume = int(read_xml_field(hub_sell, "volume"))
-        hub_min_price = float(read_xml_field(hub_sell, "min"))
+
+def handle_data(target_items, hub_items):
+    table = []
+
+    for item, hub_item in zip(target_items, hub_items):
+        id, (min_price, volume) = item
+        hub_id, (hub_min_price, hub_volume) = hub_item
+        item = id2item[id]
+        assert(id == hub_id)
+
+        price_fmted = "{:,.2f}".format(min_price)
         hub_price_fmted = "{:,.2f}".format(hub_min_price)
 
         hub_relative_formatted = "?"
@@ -182,6 +188,8 @@ def handle_data(table, xml, hub_xml):
 
         row = Row(Item=item.name, Volume=volume, Price=price_fmted, HubVolume=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=group_name)
         table.append(row)
+
+    return table
 
 def text_output(table, system):
     for parts in table:
@@ -307,11 +315,13 @@ def make_table(formatter, system):
 
     system_id = get_system_id(system)
     hub_system_id = get_system_id(MARKET_HUB)
-    table = []
+    data = []
+    hub_data = []
     for part in chunk(item_ids, CHUNK_SIZE):
-        data = download_data(part, system_id)
-        hub_data = download_data(part, hub_system_id)
-        handle_data(table, data, hub_data)
+        if system_id:
+            data += summarize_xml(download_data(part, system_id))
+        hub_data += summarize_xml(download_data(part, hub_system_id))
+    table = handle_data(data, hub_data)
 
     formatter(table, system)
 
