@@ -2,6 +2,7 @@
 
 STRUCTURE=1021149293700
 
+from collections import defaultdict
 from esipy import App, EsiSecurity, EsiClient
 
 FILE='refresh.code'
@@ -41,7 +42,23 @@ def getOrders(structure=STRUCTURE):
     esi_app, esi_security = init_esi()
     auth(esi_security)
     esi_client = EsiClient(esi_security)
+    # TODO: ok this might get paginated at some point and then we'll
+    # need to do multiple pages??
     op=esi_app.op['get_markets_structures_structure_id'](
         structure_id=STRUCTURE
     )
     return esi_client.request(op).data
+
+def summarizeOrders(orders):
+    sells = [x for x in orders if not x.is_buy_order]
+    groups = defaultdict(list)
+    for order in sells:
+        groups[order.type_id] += [order]
+
+    summary = defaultdict(lambda:(0, 0))
+    for id, orders in groups.items():
+        price = min(x.price for x in orders)
+        volume = sum(x.volume_remain for x in orders)
+        summary[id] = (price, volume)
+
+    return summary
