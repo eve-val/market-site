@@ -13,6 +13,7 @@ import email
 import sqlite3
 import sys
 import urllib.request as urlreq
+import esi_load
 
 CHUNK_SIZE = 100
 ITEM_LIST = 'items'
@@ -335,6 +336,8 @@ def main(args):
 
     if len(args) > 1 and args[1] == "--filter":
         filter_input()
+    elif len(args) > 1 and args[1] == "--auth":
+        esi_load.getRefreshToken()
     elif len(args) > 1 and args[1] == "--poller":
         make_poller()
     elif len(args) > 2 and args[1] == "--text":
@@ -343,7 +346,7 @@ def main(args):
         make_tables(html_output, args[1:])
         make_poller()
     else:
-        sys.stderr.write("usage: %s --filter | --text SYSTEMS | SYSTEMS\n" % args[0])
+        sys.stderr.write("usage: %s --filter | --auth | --text <systems or citadel ids> | <systems or citadel ids>\n" % args[0])
         return 1
 
 if __name__ == '__main__':

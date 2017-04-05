@@ -19,7 +19,7 @@ def init_esi():
     return (esi_app, esi_security)
 
 
-def updateRefreshToken():
+def getRefreshToken():
     esi_app, esi_security = init_esi()
     url = esi_security.get_auth_uri(scopes=['esi-markets.structure_markets.v1'])
     print("Visit: ", url)
