@@ -1,4 +1,5 @@
 id_list.js
+*.code
 *.html
 *.db
 *~
