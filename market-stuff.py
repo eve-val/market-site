@@ -332,11 +332,6 @@ def make_tables(formatter, systems):
     for system in systems:
         make_table(formatter, system)
 
-def make_poller():
-    item_names = [s.strip() for s in open(ITEM_LIST)]
-    item_ids = [name2item[name].id for name in item_names]
-    print("item_ids = %s;" % str(item_ids), file=open("id_list.js", "w"))
-
 def filter_input():
     for name in sys.stdin:
         name = name.strip()
@@ -351,13 +346,10 @@ def main(args):
         filter_input()
     elif len(args) > 1 and args[1] == "--auth":
         esi_load.getRefreshToken()
-    elif len(args) > 1 and args[1] == "--poller":
-        make_poller()
     elif len(args) > 2 and args[1] == "--text":
         make_tables(text_output, args[2:])
     elif len(args) > 1:
         make_tables(html_output, args[1:])
-        make_poller()
     else:
         sys.stderr.write("usage: %s --filter | --auth | --text <systems or citadel ids> | <systems or citadel ids>\n" % args[0])
         return 1
