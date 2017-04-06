@@ -274,7 +274,7 @@ $(document).ready(function() {
 </script>
 
 </head><body>
-<p>Data may be out of date or missing. Price shown is the lowest price. If you want more items on here, see instructions in #indy.
+<p>Data may be out of date or missing. Price shown is the lowest price. If you want to edit the item list, see instructions in #indy.
 
 <h1>%(system)s market</h1>
 <em>Last updated %(timestamp)s [EVE time], from ESI and

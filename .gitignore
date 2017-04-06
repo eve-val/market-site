@@ -4,3 +4,6 @@ items
 *.db
 *~
 __pycache__
+backup_items/
+run.sh
+live-site
