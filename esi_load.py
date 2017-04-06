@@ -4,6 +4,7 @@ STRUCTURE=1021149293700
 
 from collections import defaultdict
 from esipy import App, EsiSecurity, EsiClient
+import codecs
 
 FILE='refresh.code'
 
@@ -12,9 +13,10 @@ def init_esi():
     esi_security = EsiSecurity(
         app=esi_app,
         redirect_uri='https://www.msully.net/stuff/get-token',
-        client_id='720c0d0aa9714cec9d08c36a068f20c3',
-        # XXX: THIS IS A SECRET KEY BUT I DON'T UNDERSTAND WHY IT IS SECRET
-        secret_key='q33qUBc6UJHgHHxEt1qB9Wq70gvMjmRx2j1pB7ik',
+        client_id='fca36d677f9a4b8e8581d8cd2c738c2c',
+        # 'The "Secret Key" should never be human-readable in your application.'
+        secret_key=codecs.decode('AIUr5ntWiEIXiavPjKtUCiNFwlvTBlJqmElgAk4x',
+                                 'rot_13'),
     )
     return (esi_app, esi_security)
 
