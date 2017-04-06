@@ -336,10 +336,10 @@ def make_tables(formatter, systems):
         make_table(formatter, system)
 
 def filter_input():
-    for name in sys.stdin:
-        name = name.strip()
-        if name in name2item:
-            print(name)
+    names = [n.strip() for n in sys.stdin]
+    valid = {name for name in names if name in name2item}
+    for name in sorted(valid):
+        print(name)
 
 def main(args):
     load_items()
