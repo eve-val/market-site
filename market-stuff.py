@@ -62,8 +62,7 @@ except Exception as e:
 def get_system_id(name):
     c = conn.cursor()
     c.execute("SELECT itemID from invnames where itemName = ?", (name,))
-    row = c.fetchone()
-    return row[0] if row else None
+    return c.fetchone()[0]
 
 def load_items():
     c = conn.cursor()
@@ -311,7 +310,11 @@ def make_table(formatter, system):
 #        item = name2item[name]
 #        print(item.name, "----", market_groups[item.market_group_id].good_name, "----", get_parents(item.market_group_id))
 
-    system_id = get_system_id(system)
+    system_id, citadel_id = None, None
+    if '@' in system:
+        citadel_id, system = system.split('@')
+    else:
+        system_id = get_system_id(system)
     hub_system_id = get_system_id(MARKET_HUB)
     data = []
     hub_data = []
@@ -320,8 +323,8 @@ def make_table(formatter, system):
             data += summarize_xml(download_data(part, system_id))
         hub_data += summarize_xml(download_data(part, hub_system_id))
     # if it is a citadel, get the data from there!
-    if not system_id:
-        orders = esi_load.summarizeOrders(esi_load.getOrders(int(system)))
+    if citadel_id:
+        orders = esi_load.summarizeOrders(esi_load.getOrders(int(citadel_id)))
         data = [(id, orders[id]) for id in item_ids]
 
     table = handle_data(data, hub_data)

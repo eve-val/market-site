@@ -3,3 +3,4 @@ items
 *.html
 *.db
 *~
+__pycache__

@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 echo -n "Update started at "
 date
 echo "Running market updater" &&
-timeout 10m ./market-stuff.py I-CUVX 14YI-D YZ-LQL && \
+timeout 10m ./market-stuff.py 1021149293700@J134407 && \
 echo "Market updater finished" &&
-scp market.css *.html sound_market:
+cp market.css *.html live-site/
