@@ -275,10 +275,10 @@ $(document).ready(function() {
 </script>
 
 </head><body>
-<p>Data may be out of date or missing. Items might be in the wrong station. Price shown is the lowest price. If you want more items on here, message sully on Slack with links to lists of items (probably pastebinned) or submit a pull request.
+<p>Data may be out of date or missing. Price shown is the lowest price. If you want more items on here, see instructions in #indy.
 
 <h1>%(system)s market</h1>
-<em>Last updated %(timestamp)s [EVE time], from
+<em>Last updated %(timestamp)s [EVE time], from ESI and
 <a href="http://eve-central.com">eve-central</a> data no more than %(data_age)d hours old
 at that time.</em><br>
 
