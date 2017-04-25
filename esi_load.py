@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-STRUCTURE=1021149293700
-
 from collections import defaultdict, namedtuple
 from esipy import App, EsiSecurity, EsiClient
 import codecs
@@ -48,12 +46,21 @@ def initAndAuth():
     auth(esi)
     return esi
 
-def getOrders(structure=STRUCTURE):
-    esi = initAndAuth()
+def getStructures(esi, structure, strict=False):
+    charId=esi.security.verify()['CharacterID']
+    op=esi.app.op['characters_character_id_search'](
+        character_id=charId,
+        categories=['structure'],
+        strict=strict,
+        search=structure
+    )
+    return esi.client.request(op).data
+
+def getOrders(esi, structure):
     # TODO: ok this might get paginated at some point and then we'll
     # need to do multiple pages??
     op=esi.app.op['get_markets_structures_structure_id'](
-        structure_id=STRUCTURE
+        structure_id=structure
     )
     return esi.client.request(op).data
 

@@ -47,6 +47,7 @@ name2item = {}
 market_groups = {}
 market_group_useful_names = {}
 
+esi = None
 conn = None
 try:
     conn = sqlite3.connect('eve-dump.db')
@@ -310,9 +311,14 @@ def make_table(formatter, system):
 #        item = name2item[name]
 #        print(item.name, "----", market_groups[item.market_group_id].good_name, "----", get_parents(item.market_group_id))
 
+    esi = None
     system_id, citadel_id = None, None
     if '@' in system:
-        citadel_id, system = system.split('@')
+        esi = esi_load.initAndAuth()
+        citadel_name, system = system.split('@')
+        citadels = esi_load.getStructures(esi, system + " - " + citadel_name,
+                                          True)
+        citadel_id = citadels['structure'][0]
     else:
         system_id = get_system_id(system)
     hub_system_id = get_system_id(MARKET_HUB)
@@ -324,7 +330,7 @@ def make_table(formatter, system):
         hub_data += summarize_xml(download_data(part, hub_system_id))
     # if it is a citadel, get the data from there!
     if citadel_id:
-        orders = esi_load.summarizeOrders(esi_load.getOrders(int(citadel_id)))
+        orders = esi_load.summarizeOrders(esi_load.getOrders(esi, citadel_id))
         data = [(id, orders[id]) for id in item_ids]
 
     table = handle_data(data, hub_data)
