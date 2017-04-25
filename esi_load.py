@@ -2,11 +2,14 @@
 
 STRUCTURE=1021149293700
 
-from collections import defaultdict
+from collections import defaultdict, namedtuple
 from esipy import App, EsiSecurity, EsiClient
 import codecs
 
 FILE='refresh.code'
+
+ESI = namedtuple('ESI', ['app', 'security', 'client'])
+
 
 def init_esi():
     esi_app = App.create('https://esi.tech.ccp.is/latest/swagger.json?datasource=tranquility')
@@ -18,38 +21,41 @@ def init_esi():
         secret_key=codecs.decode('AIUr5ntWiEIXiavPjKtUCiNFwlvTBlJqmElgAk4x',
                                  'rot_13'),
     )
-    return (esi_app, esi_security)
-
+    esi_client = EsiClient(esi_security)
+    return ESI(esi_app, esi_security, esi_client)
 
 def getRefreshToken():
-    esi_app, esi_security = init_esi()
-    url = esi_security.get_auth_uri(scopes=['esi-markets.structure_markets.v1'])
+    esi = init_esi()
+    url = esi.security.get_auth_uri(scopes=['esi-markets.structure_markets.v1',
+                                            'esi-search.search_structures.v1'])
     print("Visit: ", url)
     print("Enter code: ", end = '')
     code = input()
 
-    auth = esi_security.auth(code)
+    auth = esi.security.auth(code)
     refresh_token = auth['refresh_token']
     with open(FILE, 'w') as f:
         f.write(refresh_token)
 
-
-def auth(esi_security):
+def auth(esi):
     refresh = open(FILE).read().strip()
-    esi_security.update_token({'refresh_token': refresh,
+    esi.security.update_token({'refresh_token': refresh,
                                'access_token': None, 'expires_in': 0})
-    esi_security.refresh()
+    esi.security.refresh()
+
+def initAndAuth():
+    esi = init_esi()
+    auth(esi)
+    return esi
 
 def getOrders(structure=STRUCTURE):
-    esi_app, esi_security = init_esi()
-    auth(esi_security)
-    esi_client = EsiClient(esi_security)
+    esi = initAndAuth()
     # TODO: ok this might get paginated at some point and then we'll
     # need to do multiple pages??
-    op=esi_app.op['get_markets_structures_structure_id'](
+    op=esi.app.op['get_markets_structures_structure_id'](
         structure_id=STRUCTURE
     )
-    return esi_client.request(op).data
+    return esi.client.request(op).data
 
 def summarizeOrders(orders):
     sells = [x for x in orders if not x.is_buy_order]
