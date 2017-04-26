@@ -340,7 +340,7 @@ def make_tables(formatter, systems):
 
 def filter_input():
     names = [n.strip() for n in sys.stdin]
-    valid = {name for name in names if name in name2item}
+    valid = {name for name in names if name and name in name2item}
     for name in sorted(valid):
         print(name)
 
