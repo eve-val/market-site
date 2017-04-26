@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-# This requires a sqlite database dump from
-# http://pozniak.pl/dbdump/ody110-sqlite3-v1.db.bz2
-
 # Something that I ran to extract module lists from copy pasted forum posts:
 # cat new-list | tr '[' '\n' | tr ',' '\n' | sed -e 's/^[ \t]*//' | sed 's/ x.$//' | sort | uniq | ./market-stuff.py --filter
 
@@ -275,7 +272,7 @@ $(document).ready(function() {
 </script>
 
 </head><body>
-<p>Data may be out of date or missing. Price shown is the lowest price. If you want to edit the item list, see instructions in #indy.
+<p>Price shown is the lowest price. If you want to edit the item list, see instructions in #indy.
 
 <h1>%(system)s market</h1>
 <em>Last updated %(timestamp)s [EVE time], from ESI and
@@ -353,14 +350,12 @@ def main(args):
 
     if len(args) > 1 and args[1] == "--filter":
         filter_input()
-    elif len(args) > 1 and args[1] == "--auth":
-        esi_load.getRefreshToken()
     elif len(args) > 2 and args[1] == "--text":
         make_tables(text_output, args[2:])
     elif len(args) > 1:
         make_tables(html_output, args[1:])
     else:
-        sys.stderr.write("usage: %s --filter | --auth | --text <systems or citadel ids> | <systems or citadel ids>\n" % args[0])
+        sys.stderr.write("usage: %s --filter | --text <systems or citadel@systems> | <systems or citadel@systems>\n" % args[0])
         return 1
 
 if __name__ == '__main__':
