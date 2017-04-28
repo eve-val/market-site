@@ -13,6 +13,6 @@ curl -s $URL | ./market-stuff.py --filter > items
 
 # Run the stuff
 echo "Running market updater" &&
-timeout 10m ./market-stuff.py "Dern's House of Pancakes@J134407" && \
+timeout 10m ./market-stuff.py "Statio Tranquillitatis@J134407" && \
 echo "Market updater finished" &&
 scp market.css *.html sound_market:
