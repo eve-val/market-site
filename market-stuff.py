@@ -188,7 +188,7 @@ def handle_data(target_items, hub_items):
 
     return table
 
-def text_output(table, system):
+def text_output(table, system, name):
     for parts in table:
         print(parts)
 
@@ -223,7 +223,7 @@ def format_table(table):
     return table_output
 
 
-def html_output(table, system):
+def html_output(table, system, name):
     page_template = """
 <html><head><title>%(system)s market data</title>
 <!-- DataTables CSS -->
@@ -274,7 +274,7 @@ $(document).ready(function() {
 </head><body>
 <p>Price shown is the lowest price. If you want to edit the item list, see instructions in #indy.
 
-<h1>%(system)s market</h1>
+<h1>%(name)s market</h1>
 <em>Last updated %(timestamp)s [EVE time], from ESI and
 <a href="http://eve-central.com">eve-central</a> data no more than %(data_age)d hours old
 at that time.</em><br>
@@ -289,6 +289,7 @@ at that time.</em><br>
 
     print(page_template % {
         'system': system,
+        'name': name,
         'numeric_columns': [index for index, column in enumerate(column_properties.values()) if column.is_numeric],
         'header': make_row("<th>", "</th>", [column.display_name for column in column_properties.values()]),
         'timestamp': email.utils.formatdate(usegmt=True),
@@ -313,10 +314,11 @@ def make_table(formatter, system):
     if '@' in system:
         esi = esi_load.initAndAuth()
         citadel_name, system = system.split('@')
-        citadels = esi_load.getStructures(esi, system + " - " + citadel_name,
-                                          True)
+        name = system + " - " + citadel_name
+        citadels = esi_load.getStructures(esi, name, True)
         citadel_id = citadels['structure'][0]
     else:
+        name = system
         system_id = get_system_id(system)
     hub_system_id = get_system_id(MARKET_HUB)
     data = []
@@ -332,7 +334,7 @@ def make_table(formatter, system):
 
     table = handle_data(data, hub_data)
 
-    formatter(table, system)
+    formatter(table, system, name)
 
 def make_tables(formatter, systems):
     for system in systems:
