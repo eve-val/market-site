@@ -176,7 +176,7 @@ def handle_data(target_items, hub_items):
         hub_price_fmted = "{:,.2f}".format(hub_min_price)
 
         hub_relative_formatted = "?"
-        if volume > 0:
+        if volume > 0 and hub_min_price > 0:
             hub_relative = (min_price - hub_min_price) * 100.0 / (hub_min_price)
             hub_relative_formatted = "{:.1f}%".format(hub_relative)
 
