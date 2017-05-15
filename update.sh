@@ -9,7 +9,13 @@ date
 # Fech new items
 mkdir -p backup_items/
 cp items backup_items/items_`date +%Y%m%d-%H%M`
-curl -s $URL | ./market-stuff.py --filter > items
+curl -s $URL | ./market-stuff.py --filter > __new_items
+if [ -s __new_items ]; then
+    mv __new_items items
+else
+    echo "Arg couldn't download the items"
+    rm __new_items
+fi
 
 # Run the stuff
 echo "Running market updater" &&
