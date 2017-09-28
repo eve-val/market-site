@@ -166,6 +166,11 @@ def summarize_xml(xml):
 def handle_data(target_items, hub_items):
     table = []
 
+    # If we couldn't get data from eve-central for hub relative stuff,
+    # fill in dummy data.
+    if not hub_items:
+        hub_items = [(id, (0,"?")) for (id, _) in target_items]
+
     for item, hub_item in zip(target_items, hub_items):
         id, (min_price, volume) = item
         hub_id, (hub_min_price, hub_volume) = hub_item
