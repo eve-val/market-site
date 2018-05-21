@@ -129,7 +129,7 @@ def useful_market_group_name(id):
 
 
 def download_data(ids, system_id):
-    base_url = 'http://api.eve-central.com/api/marketstat?hours=%d&usesystem=%d&' % (EVECENTRAL_HOURS, system_id)
+    base_url = 'http://api.evemarketer.com/ec/marketstat?hours=%d&usesystem=%d&' % (EVECENTRAL_HOURS, system_id)
     suffix = "&".join("typeid=%d" % i for i in ids)
     url = base_url + suffix
 #    print(url)
@@ -166,7 +166,7 @@ def summarize_xml(xml):
 def handle_data(target_items, hub_items):
     table = []
 
-    # If we couldn't get data from eve-central for hub relative stuff,
+    # If we couldn't get data from evemarketer for hub relative stuff,
     # fill in dummy data.
     if not hub_items:
         hub_items = [(id, (0,"?")) for (id, _) in target_items]
@@ -281,7 +281,7 @@ $(document).ready(function() {
 
 <h1>%(name)s market</h1>
 <em>Last updated %(timestamp)s [EVE time], from ESI and
-<a href="http://eve-central.com">eve-central</a> data no more than %(data_age)d hours old
+<a href="http://evemarketer.com">evemarketer</a> data no more than %(data_age)d hours old
 at that time.</em><br>
 
 <table border=1 id='market'>
