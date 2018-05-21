@@ -129,11 +129,13 @@ def useful_market_group_name(id):
 
 
 def download_data(ids, system_id):
-    base_url = 'http://api.evemarketer.com/ec/marketstat?hours=%d&usesystem=%d&' % (EVECENTRAL_HOURS, system_id)
+    base_url = 'https://api.evemarketer.com/ec/marketstat?hours=%d&usesystem=%d&' % (EVECENTRAL_HOURS, system_id)
     suffix = "&".join("typeid=%d" % i for i in ids)
     url = base_url + suffix
 #    print(url)
-    s = urlreq.urlopen(url)
+    # evemarketer was blocking the urllib User-Agent (??), so lie
+    req = urlreq.Request(url, data=None, headers={'User-Agent': 'wtf'})
+    s = urlreq.urlopen(req)
     s = "".join(x.decode() for x in s)
 #    print(s)
 
