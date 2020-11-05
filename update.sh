@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cd $(dirname $0)
+source ./bin/activate
+
 echo -n "Update started at "
 date
 
@@ -17,5 +20,5 @@ fi
 # Run the stuff
 echo "Running market updater" &&
 timeout 10m ./market-stuff.py "International Space Station@LSC4-P" && \
-echo "Market updater finished"
-#scp market.css *.html sound_market:
+echo "Market updater finished" && \
+cp market.css *.html /srv/of-sound-mind.com/market
