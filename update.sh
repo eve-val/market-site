@@ -19,6 +19,6 @@ fi
 
 # Run the stuff
 echo "Running market updater" &&
-timeout 10m ./market-stuff.py "Statio Tranquillitatis@J100820" && \
+timeout 10m ./market-stuff.py "International Space Station@LSC4-P" && \
 echo "Market updater finished" &&
 scp market.css *.html sound_market:
