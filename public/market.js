@@ -29,12 +29,17 @@
       },
 
       get filteredRows() {
-        return this.rows.filter((row) => {
-          let q = this.filter.toLowerCase();
-          return q === "" ||
-            row.item.toLowerCase().includes(q) ||
-            row.group.toLowerCase().includes(q);
-        });
+        let q = this.filter.toLowerCase();
+        if (!q) return this.rows;
+        let tokens = q.split(/\s+/);
+        return this.rows.filter((row) =>
+          tokens.reduce((isMatch, token) => {
+            return isMatch &&
+              ((token === 'missing' && !row.stocked) ||
+               (token === 'stocked' && row.stocked) ||
+               row.item.toLowerCase().includes(token) ||
+               row.group.toLowerCase().includes(token))
+          }, true));
       }
     }
   }
