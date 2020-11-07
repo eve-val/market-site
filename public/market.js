@@ -8,6 +8,7 @@
 
   window.market = function() {
     return {
+      filter: "",
       text: 'Hello, LSC4-P',
       rows: [],
       
@@ -28,7 +29,12 @@
       },
 
       get filteredRows() {
-        return this.rows;
+        return this.rows.filter((row) => {
+          let q = this.filter.toLowerCase();
+          return q === "" ||
+            row.item.toLowerCase().includes(q) ||
+            row.group.toLowerCase().includes(q);
+        });
       }
     }
   }
