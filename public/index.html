@@ -21,7 +21,9 @@
     <h1 class="mt-10 text-4xl text-center font-extrabold tracking-wider">LSC4-P — International Space Station Market</h1>
     <div class="mx-auto mt-5 container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       <div class="col-span-full w-full rounded-md overflow-hidden">
-        <input x-model="filter" class="px-4 py-2 w-full bg-gray-100 focus:outline-none"
+        <input x-model.debounce="filter"
+               @input.debounce="updateLocationHash()"
+               class="px-4 py-2 w-full bg-gray-100 focus:outline-none"
                placeholder="Type your search filter here...">
       </div>
       <template x-for="row in filteredRows" x-ref="row.item">

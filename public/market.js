@@ -8,7 +8,7 @@
 
   window.market = function() {
     return {
-      filter: "",
+      filter: decodeURIComponent(window.location.hash.split('#').pop()),
       text: 'Hello, LSC4-P',
       rows: [],
       
@@ -40,6 +40,10 @@
                row.item.toLowerCase().includes(token) ||
                row.group.toLowerCase().includes(token))
           }, true));
+      },
+
+      updateLocationHash() {
+        history.pushState(null, null, '#'+this.filter);
       }
     }
   }
