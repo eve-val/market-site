@@ -1,0 +1,24 @@
+{
+  "name": "market-site",
+  "version": "0.1.0",
+  "description": "market-site\r ===========",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss build css/styles.css -o public/styles.css",
+    "start": "live-server public --no-browser --port 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eve-val/market-site"
+  },
+  "author": "Sam Tesla <samuel.tesla@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eve-val/market-site/issues"
+  },
+  "homepage": "https://github.com/eve-val/market-site#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1",
+    "tailwindcss": "^1.9.6"
+  }
+}
