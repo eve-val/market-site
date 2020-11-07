@@ -20,7 +20,10 @@
             return resp.json();
           })
           .then(rows => {
-            this.rows = rows
+            this.rows = rows;
+            this.rows.forEach((r) => {
+              r.stocked = r.volume > 0;
+            })
           });
       },
 
