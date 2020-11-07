@@ -23,6 +23,10 @@
           .then(rows => {
             this.rows = rows;
             this.rows.forEach((r) => {
+              // These are arbitrary thresholds I picked because it looks like
+              // a lot of things get stocked in stacks of 10. We should
+              // consider setting thresholds in the JSON and then using those
+              // here instead of my magic numbers. -ST
               if (r.volume > 5) {
                 r.stocked = true
                 r.status = 'Stocked'
