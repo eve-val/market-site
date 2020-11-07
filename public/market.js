@@ -23,7 +23,16 @@
           .then(rows => {
             this.rows = rows;
             this.rows.forEach((r) => {
-              r.stocked = r.volume > 0;
+              if (r.volume > 5) {
+                r.stocked = true
+                r.status = 'Stocked'
+              } else if (r.volume > 0) {
+                r.stockLow = true
+                r.status = 'Low'
+              } else {
+                r.missing = true
+                r.status = 'Missing'
+              }
             })
           });
       },
@@ -35,8 +44,9 @@
         return this.rows.filter((row) =>
           tokens.reduce((isMatch, token) => {
             return isMatch &&
-              ((token === 'missing' && !row.stocked) ||
+              ((token === 'missing' && row.missing) ||
                (token === 'stocked' && row.stocked) ||
+               (token === 'low' && row.stockLow) ||
                row.item.toLowerCase().includes(token) ||
                row.group.toLowerCase().includes(token))
           }, true));

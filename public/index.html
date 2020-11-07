@@ -34,12 +34,15 @@
               <p class="italic text-sm" x-text="row.group"></p>
             </div>
             <div class="pr-4 flex items-center"
-              :class="{'text-yellow-500': !row.stocked,
+              :class="{'text-red-500': row.missing,
+                       'text-yellow-500': row.stockLow,
                        'text-green-500': row.stocked}">
-              <span class="font-semibold" x-text="row.stocked ? 'Stocked' : 'Missing'"></span>
+              <span class="font-semibold" x-text="row.status"></span>
               <span class="ml-1 h-9 w-9 rounded-full overflow-hidden bg-yellow-100 border border-yellow-500 flex items-center justify-center"
-                    :class="{'bg-yellow-100': !row.stocked,
-                             'border-yellow-500': !row.stocked,
+                    :class="{'bg-red-100': row.missing,
+                             'border-red-500': row.missing,
+                             'bg-yellow-100': row.stockLow,
+                             'border-yellow-500': row.stockLow,
                              'bg-green-100': row.stocked,
                              'border-green-500': row.stocked}">
                 <template x-if="!row.stocked">
