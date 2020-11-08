@@ -22,4 +22,4 @@ How to run
 
 How to work on the front-end
 ----------------------------
-* The front-end is just static content, but it expects that `/market.json` is a valid URL and looks like the file at `public/market.json`. The CSS is compiled from `css/styles.css` by running `npm run build:css:purge`, which will compile it and strip out all unused CSS classes. During development, build the CSS with `npm run build:css`, which skips that last step.
+* The front-end is just static content, but it expects that `/market.json` is a valid URL and looks like the file at `public/market.json`. The CSS is compiled from `css/styles.css` by running `npm run build:css:dist`, which will compile it and strip out all unused CSS classes. During development, build the CSS with `npm run build:css`, which skips that last step.
