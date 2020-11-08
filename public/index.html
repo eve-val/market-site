@@ -75,20 +75,20 @@
           <div class="mt-2 border-t-2 pt-2">
             <div class="px-4 grid grid-cols-2 gap-4">
               <div>
-                <dt class="font-bold">Volume</dt>
-                <dd x-text="row.volume"</dd>
+                <dt class="inline-block mb-1 border-b-2 border-gray-400 border-dotted">Volume</dt>
+                <dd class="font-bold" x-text="row.volume"</dd>
               </div>
               <div class="text-right">
-                <dt class="font-bold">Price</dt>
-                <dd x-text="formatDecimal(row.price)"</dd>
+                <dt class="inline-block mb-1 border-b-2 border-gray-400 border-dotted">Price</dt>
+                <dd class="font-bold"x-text="formatDecimal(row.price)"</dd>
               </div>
               <div>
-                <dt class="font-bold">Jita Volume</dt>
-                <dd x-text="row.jita_volume"></dd>
+                <dt class="inline-block mb-1 border-b-2 border-gray-400 border-dotted">Jita Volume</dt>
+                <dd class="font-bold" x-text="row.jita_volume"></dd>
               </div>
               <div class="text-right">
-                <dt class="font-bold">Jita Price</dt>
-                <dd x-text="formatDecimal(row.jita_price)"></dd>
+                <dt class="inline-block mb-1 border-b-2 border-gray-400 border-dotted">Jita Price</dt>
+                <dd class="font-bold" x-text="formatDecimal(row.jita_price)"></dd>
               </div>
             </div>
           </div>
