@@ -1,0 +1,100 @@
+<!DOCTYPE html5>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-COmpatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LSC4-P Market Data</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <style>
+    [x-cloak] { display: none; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+  <script src="/market.js"></script>
+</head>
+<body class="bg-gray-300 text-gray-900"
+      x-data="market()"
+      x-init="fetchData()"
+      x-cloak>
+  <div class="max-w-6xl mx-auto">
+    <h1 class="mt-10 text-4xl text-center font-extrabold tracking-wider">LSC4-P — International Space Station Market</h1>
+    <div class="mx-auto mt-5 container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div class="col-span-full w-full rounded-md overflow-hidden">
+        <input x-model.debounce="filter"
+               @input.debounce="updateLocationHash()"
+               class="px-4 py-2 w-full bg-gray-100 focus:outline-none"
+               placeholder="Type your search filter here...">
+      </div>
+      <template x-for="row in filteredRows" x-ref="row.item">
+        <div class="py-2 bg-gray-100 rounded-xl shadow-xl">
+          <div class="flex items-center justify-between">
+            <div class="px-4">
+              <p class="font-extrabold" x-text="row.item"></p>
+              <p class="italic text-sm" x-text="row.group"></p>
+            </div>
+            <div class="pr-4 flex items-center"
+              :class="{'text-red-500': row.missing,
+                       'text-yellow-500': row.stockLow,
+                       'text-green-500': row.stocked}">
+              <span class="font-semibold" x-text="row.status"></span>
+              <span class="ml-1 h-9 w-9 rounded-full overflow-hidden bg-yellow-100 border border-yellow-500 flex items-center justify-center"
+                    :class="{'bg-red-100': row.missing,
+                             'border-red-500': row.missing,
+                             'bg-yellow-100': row.stockLow,
+                             'border-yellow-500': row.stockLow,
+                             'bg-green-100': row.stocked,
+                             'border-green-500': row.stocked}">
+                <template x-if="!row.stocked">
+                  <svg class="h-6 w-6"
+                       xmlns="http://www.w3.org/2000/svg"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke="currentColor">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </template>
+                <template x-if="row.stocked">
+                  <svg class="w-6 h-6"
+                       xmlns="http://www.w3.org/2000/svg"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke="currentColor">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </template>
+              </span>
+            </div>
+          </div>
+          <div class="mt-2 border-t-2 pt-2">
+            <div class="px-4 grid grid-cols-2 gap-4">
+              <div>
+                <dt class="inline-block mb-1 border-b-2 border-gray-400 border-dotted">Volume</dt>
+                <dd class="font-bold" x-text="row.volume"</dd>
+              </div>
+              <div class="text-right">
+                <dt class="inline-block mb-1 border-b-2 border-gray-400 border-dotted">Price</dt>
+                <dd class="font-bold"x-text="formatDecimal(row.price)"</dd>
+              </div>
+              <div>
+                <dt class="inline-block mb-1 border-b-2 border-gray-400 border-dotted">Jita Volume</dt>
+                <dd class="font-bold" x-text="row.hub_volume"></dd>
+              </div>
+              <div class="text-right">
+                <dt class="inline-block mb-1 border-b-2 border-gray-400 border-dotted">Jita Price</dt>
+                <dd class="font-bold" x-text="formatDecimal(row.hub_price)"></dd>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</body>
+</html>

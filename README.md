@@ -19,3 +19,7 @@ How to run
 * market-script.py 'Citadel Name@SystemName' - Generates SystemName.html containing a market summary a citadel in SystemName using ESI data
 * market-script.py SystemName - Generates SystemName.html containing a market summary from the stations in SystemName using eve-central data
 * update.sh - Drives the site updating process for my corp
+
+How to work on the front-end
+----------------------------
+* The front-end is just static content, but it expects that `/market.json` is a valid URL and looks like the file at `public/market.json`. The CSS is compiled from `css/styles.css` by running `npm run build:css:dist`, which will compile it and strip out all unused CSS classes. During development, build the CSS with `npm run build:css`, which skips that last step.

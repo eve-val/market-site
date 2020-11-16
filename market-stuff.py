@@ -7,6 +7,7 @@ from collections import namedtuple
 from xml.dom.minidom import parseString
 import collections
 import email
+import json
 import sqlite3
 import sys
 import urllib.request as urlreq
@@ -179,9 +180,6 @@ def handle_data(target_items, hub_items):
         item = id2item[id]
         assert(id == hub_id)
 
-        price_fmted = "{:,.2f}".format(min_price)
-        hub_price_fmted = "{:,.2f}".format(hub_min_price)
-
         hub_relative_formatted = "?"
         if volume > 0 and hub_min_price > 0:
             hub_relative = (min_price - hub_min_price) * 100.0 / (hub_min_price)
@@ -190,7 +188,7 @@ def handle_data(target_items, hub_items):
         group_name = (market_groups[item.market_group_id].good_name
                       if item.market_group_id else "WTF")
 
-        row = Row(Item=item.name, Volume=volume, Price=price_fmted, HubVolume=hub_volume, HubPrice=hub_price_fmted, HubRelative=hub_relative_formatted, Group=group_name)
+        row = Row(Item=item.name, Volume=volume, Price=min_price, HubVolume=hub_volume, HubPrice=hub_min_price, HubRelative=hub_relative_formatted, Group=group_name)
         table.append(row)
 
     return table
@@ -198,6 +196,18 @@ def handle_data(target_items, hub_items):
 def text_output(table, system, name):
     for parts in table:
         print(parts)
+
+def json_output(table, system, name):
+    table = [{
+        "group": row.Group,
+        "item": row.Item,
+        "volume": row.Volume,
+        "price": row.Price,
+        "hub_volume": row.HubVolume,
+        "hub_price": row.HubPrice,
+    } for row in table]
+    print(json.dumps(table))
+
 
 def make_tag(name, attribs=None):
     if attribs:
@@ -216,19 +226,21 @@ def make_row(open_tag, close_tag, entries, classes=None):
 def format_table(table):
     table_output = ""
     for entry in table:
+        price_fmted = "{:,.2f}".format(entry.Price)
+        hub_price_fmted = "{:,.2f}".format(entry.HubPrice)
+        row = Row(Item=entry.Item, Volume=entry.Volume, Price=price_fmted, HubVolume=entry.HubVolume, HubPrice=hub_price_fmted, HubRelative=entry.HubRelative, Group=entry.Group)
         classes = []
-        if entry.Volume == 0:
+        if row.Volume == 0:
             classes.append('market_hole')
-        elif not entry.HubRelative.startswith("?"):
-            if entry.HubRelative[0] == '-':
+        elif not row.HubRelative.startswith("?"):
+            if row.HubRelative[0] == '-':
                 classes.append('relative_negative')
             else:
                 classes.append('relative_positive')
 
-        table_output += make_row("<td>", "</td>", entry, classes=classes) + "\n"
+        table_output += make_row("<td>", "</td>", row, classes=classes) + "\n"
 
     return table_output
-
 
 def html_output(table, system, name):
     page_template = """
@@ -359,6 +371,8 @@ def main(args):
 
     if len(args) > 1 and args[1] == "--filter":
         filter_input()
+    elif len(args) > 2 and args[1] == "--json":
+        make_tables(json_output, args[2:])
     elif len(args) > 2 and args[1] == "--text":
         make_tables(text_output, args[2:])
     elif len(args) > 1:

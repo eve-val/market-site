@@ -1,5 +1,6 @@
 fits
 items
+market.json
 *.code
 *.html
 *.db
@@ -15,3 +16,5 @@ lib64
 pyvenv.cfg
 share
 pip-selfcheck.json
+node_modules
+venv
