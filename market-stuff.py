@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-# Something that I ran to extract module lists from copy pasted forum posts:
-# cat new-list | tr '[' '\n' | tr ',' '\n' | sed -e 's/^[ \t]*//' | sed 's/ x.$//' | sort | uniq | ./market-stuff.py --filter
-
 from collections import namedtuple
 from xml.dom.minidom import parseString
 import collections
@@ -69,7 +66,6 @@ def load_items():
 
     for entry in c:
         item = Item(*entry)
-#        print(item)
         name2item[item.name] = item
         id2item[item.id] = item
 
@@ -133,12 +129,10 @@ def download_data(ids, system_id):
     base_url = 'https://api.evemarketer.com/ec/marketstat?hours=%d&usesystem=%d&' % (EVECENTRAL_HOURS, system_id)
     suffix = "&".join("typeid=%d" % i for i in ids)
     url = base_url + suffix
-#    print(url)
     # evemarketer was blocking the urllib User-Agent (??), so lie
     req = urlreq.Request(url, data=None, headers={'User-Agent': 'wtf'})
     s = urlreq.urlopen(req)
     s = "".join(x.decode() for x in s)
-#    print(s)
 
     obj = parseString(s)
     return obj
@@ -194,8 +188,10 @@ def handle_data(target_items, hub_items):
     return table
 
 def text_output(table, system, name):
+    f = open(system + ".txt", "w")
     for parts in table:
-        print(parts)
+        print(parts, file = f)
+    f.close()
 
 def json_output(table, system, name):
     table = [{
@@ -206,8 +202,9 @@ def json_output(table, system, name):
         "hub_volume": row.HubVolume,
         "hub_price": row.HubPrice,
     } for row in table]
-    print(json.dumps(table))
-
+    f = open(system + ".json", "w")
+    print(json.dumps(table), file = f)
+    f.close()
 
 def make_tag(name, attribs=None):
     if attribs:
@@ -318,15 +315,9 @@ at that time.</em><br>
           file = f)
     f.close()
 
-def make_table(formatter, system):
+def make_table(formatters, system):
     item_names = [s.strip() for s in open(ITEM_LIST)]
-#    print(item_names)
     item_ids = [name2item[name].id for name in item_names]
-#    print(item_ids)
-
-#    for name in item_names:
-#        item = name2item[name]
-#        print(item.name, "----", market_groups[item.market_group_id].good_name, "----", get_parents(item.market_group_id))
 
     esi = None
     system_id, citadel_id = None, None
@@ -353,11 +344,12 @@ def make_table(formatter, system):
 
     table = handle_data(data, hub_data)
 
-    formatter(table, system, name)
+    for f in formatters:
+        f(table, system, name)
 
-def make_tables(formatter, systems):
+def make_tables(formatters, systems):
     for system in systems:
-        make_table(formatter, system)
+        make_table(formatters, system)
 
 def filter_input():
     names = [n.strip() for n in sys.stdin]
@@ -372,14 +364,16 @@ def main(args):
     if len(args) > 1 and args[1] == "--filter":
         filter_input()
     elif len(args) > 2 and args[1] == "--json":
-        make_tables(json_output, args[2:])
+        make_tables([json_output], args[2:])
     elif len(args) > 2 and args[1] == "--text":
-        make_tables(text_output, args[2:])
-    elif len(args) > 1:
-        make_tables(html_output, args[1:])
-    else:
+        make_tables([text_output], args[2:])
+    elif len(args) > 1 and args[1] == "--html":
+        make_tables([html_output], args[1:])
+    elif len(args) == 1 and args[1] == "--help":
         sys.stderr.write("usage: %s --filter | --text <systems or citadel@systems> | <systems or citadel@systems>\n" % args[0])
         return 1
+    else:
+        make_tables([html_output, json_output], args[1:])
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))

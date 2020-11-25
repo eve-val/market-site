@@ -1,6 +1,6 @@
 (function(document, window, undefined) {
   window.formatDecimal = function(amt) {
-    return amt.toLocaleString('en', { 
+    return amt.toLocaleString('en', {
       maximumFractionDigits: 2,
       minimumFractionDigits: 2
     });
@@ -11,9 +11,8 @@
       filter: decodeURIComponent(window.location.hash.split('#').pop()),
       text: 'Hello, LSC4-P',
       rows: [],
-      
       fetchData() {
-        fetch('/market.json')
+        fetch('/LSC4-P.json')
           .then(resp => {
             if (!resp.ok) {
               throw new Error('error fetching market data');
