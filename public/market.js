@@ -16,15 +16,13 @@
   }
 
   window.market = function() {
-    var viewData;
 
     return {
       filter: decodeURIComponent(window.location.hash.split('#').pop()),
       text: 'Hello, LSC4-P',
+      rows: [],
 
       initialize() {
-        viewData = this;
-
         fetch('/LSC4-P.json')
           .then(resp => {
             if (!resp.ok) {
@@ -52,6 +50,7 @@
             })
           });
 
+        var viewData = this;
         new ClipboardJS('#clipboard', {
           text: function() {
             let rows = viewData.filteredRows;
