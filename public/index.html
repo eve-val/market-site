@@ -98,7 +98,9 @@
               </div>
               <div class="text-right">
                 <dt class="inline-block mb-1 border-b-2 border-gray-400 border-dotted">Jita Price</dt>
-                <dd class="font-bold" x-text="formatDecimal(row.hub_price)"></dd>
+                <dd>
+                  <a class="font-bold" :href="fuzzworkPrice(row.itemID)" x-text="formatDecimal(row.hub_price)"></a>
+                </dd>
               </div>
             </div>
           </div>

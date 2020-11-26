@@ -80,6 +80,10 @@
           }, true));
       },
 
+      fuzzworkPrice(typeID) {
+        return 'https://market.fuzzwork.co.uk/hub/type/' + typeID + '/';
+      },
+
       iconURL(typeID) {
         return 'https://images.evetech.net/types/' + typeID + '/icon';
       },
