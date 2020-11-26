@@ -6,6 +6,15 @@
     });
   }
 
+  function stockIsLow(r) {
+    if (r.price >= 50000000) {
+      return r.volume <= 2;
+    } else if (r.hub_volume > 100000) {
+      return r.volume < 5000;
+    }
+    return r.volume < 10;
+  }
+
   window.market = function() {
     return {
       filter: decodeURIComponent(window.location.hash.split('#').pop()),
@@ -26,15 +35,15 @@
               // a lot of things get stocked in stacks of 10. We should
               // consider setting thresholds in the JSON and then using those
               // here instead of my magic numbers. -ST
-              if (r.volume > 5) {
-                r.stocked = true
-                r.status = 'Stocked'
-              } else if (r.volume > 0) {
+              if (r.volume == 0) {
+                r.missing = true
+                r.status = 'Missing'
+              } else if (stockIsLow(r)) {
                 r.stockLow = true
                 r.status = 'Low'
               } else {
-                r.missing = true
-                r.status = 'Missing'
+                r.stocked = true
+                r.status = 'Stocked'
               }
             })
           });
