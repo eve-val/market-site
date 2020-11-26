@@ -46,12 +46,16 @@
         let tokens = q.split(/\s+/);
         return this.rows.filter((row) =>
           tokens.reduce((isMatch, token) => {
-            return isMatch &&
-              ((token === 'missing' && row.missing) ||
-               (token === 'stocked' && row.stocked) ||
-               (token === 'low' && row.stockLow) ||
-               row.item.toLowerCase().includes(token) ||
-               row.group.toLowerCase().includes(token))
+            let negate = (token && token[0] === '-');
+            if (negate) { token = token.substring(1); }
+            let matched = (
+              (token === 'missing' && row.missing) ||
+              (token === 'stocked' && row.stocked) ||
+              (token === 'low' && row.stockLow) ||
+              row.item.toLowerCase().includes(token) ||
+              row.group.toLowerCase().includes(token));
+            return isMatch && (negate !== matched);
+              
           }, true));
       },
 
