@@ -16,11 +16,15 @@
   }
 
   window.market = function() {
+    var viewData;
+
     return {
       filter: decodeURIComponent(window.location.hash.split('#').pop()),
       text: 'Hello, LSC4-P',
-      rows: [],
-      fetchData() {
+
+      initialize() {
+        viewData = this;
+
         fetch('/LSC4-P.json')
           .then(resp => {
             if (!resp.ok) {
@@ -28,8 +32,8 @@
             }
             return resp.json();
           })
-          .then(rows => {
-            this.rows = rows;
+          .then(data => {
+            rows = this.rows = data;
             this.rows.forEach((r) => {
               // These are arbitrary thresholds I picked because it looks like
               // a lot of things get stocked in stacks of 10. We should
@@ -47,6 +51,13 @@
               }
             })
           });
+
+        new ClipboardJS('#clipboard', {
+          text: function() {
+            let rows = viewData.filteredRows;
+            return rows.map(r => r.item).join("\n");
+          }
+        });
       },
 
       get filteredRows() {
