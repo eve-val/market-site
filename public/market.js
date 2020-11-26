@@ -21,6 +21,7 @@
     return {
       filter: decodeURIComponent(window.location.hash.split('#').pop()),
       text: 'Hello, LSC4-P',
+      rows: [],
 
       initialize() {
         viewData = this;
