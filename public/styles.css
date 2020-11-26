@@ -605,6 +605,12 @@ video {
   background-color: rgba(240, 255, 244, var(--bg-opacity));
 }
 
+.bg-blue-500 {
+  --bg-opacity: 1;
+  background-color: #4299e1;
+  background-color: rgba(66, 153, 225, var(--bg-opacity));
+}
+
 .border-gray-400 {
   --border-opacity: 1;
   border-color: #cbd5e0;
@@ -683,6 +689,10 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
 }
 
 .font-semibold {
@@ -775,6 +785,12 @@ video {
 
 .text-right {
   text-align: right;
+}
+
+.text-gray-100 {
+  --text-opacity: 1;
+  color: #f7fafc;
+  color: rgba(247, 250, 252, var(--text-opacity));
 }
 
 .text-gray-900 {

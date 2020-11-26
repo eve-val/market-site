@@ -11,11 +11,12 @@
     [x-cloak] { display: none; }
   </style>
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
   <script src="/market.js"></script>
 </head>
 <body class="bg-gray-300 text-gray-900"
       x-data="market()"
-      x-init="fetchData()"
+      x-init="initialize()"
       x-cloak>
   <div class="max-w-6xl mx-auto">
     <h1 class="mt-10 text-4xl text-center font-extrabold tracking-wider">LSC4-P — International Space Station Market</h1>
@@ -26,7 +27,12 @@
                class="px-4 py-2 w-full bg-gray-100 focus:outline-none"
                placeholder="Type your search filter here...">
       </div>
-      <div class="col-span-full w-full rounded-md overflow-hidden">Go to <a href="/LSC4-P.html">tabular view</a></div>
+      <div class="col-span-full flex justify-around">
+        <a class="px-4 py-2 bg-blue-500 text-gray-100 rounded-md" href="/LSC4-P.html">Tabular View</a>
+        <button id="clipboard" class="px-4 py-2 bg-blue-500 text-gray-100 rounded-md focus:outline-none">
+          Copy List to Clipboard
+        </button>
+      </div>
       <template x-for="row in filteredRows" x-ref="row.item">
         <div class="py-2 bg-gray-100 rounded-xl shadow-xl">
           <div class="flex items-center justify-between">
