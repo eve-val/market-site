@@ -48,13 +48,14 @@
           tokens.reduce((isMatch, token) => {
             let negate = (token && token[0] === '-');
             if (negate) { token = token.substring(1); }
+            if (!token) { return isMatch }
             let matched = (
               (token === 'missing' && row.missing) ||
               (token === 'stocked' && row.stocked) ||
               (token === 'low' && row.stockLow) ||
               row.item.toLowerCase().includes(token) ||
               row.group.toLowerCase().includes(token));
-            return isMatch && (negate !== matched);
+            return isMatch && ((negate !== matched) || !token);
               
           }, true));
       },
