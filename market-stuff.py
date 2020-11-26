@@ -197,6 +197,7 @@ def json_output(table, system, name):
     table = [{
         "group": row.Group,
         "item": row.Item,
+        "itemID": name2item[row.Item].id,
         "volume": row.Volume,
         "price": row.Price,
         "hub_volume": row.HubVolume,
