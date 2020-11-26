@@ -18,27 +18,30 @@
       x-data="market()"
       x-init="initialize()"
       x-cloak>
-  <div class="max-w-6xl mx-auto">
+  <div class="max-w-6xl mx-auto px-4">
     <h1 class="mt-10 text-4xl text-center font-extrabold tracking-wider">LSC4-P — International Space Station Market</h1>
-    <div class="mx-auto mt-5 container grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+    <div class="mt-5 container grid grid-cols-1 lg:grid-cols-2 gap-4">
       <div class="col-span-full w-full rounded-md overflow-hidden">
         <input x-model.debounce="filter"
                @input.debounce="updateLocationHash()"
                class="px-4 py-2 w-full bg-gray-100 focus:outline-none"
                placeholder="Type your search filter here...">
       </div>
-      <div class="col-span-full flex justify-around">
-        <a class="px-4 py-2 bg-blue-500 text-gray-100 rounded-md" href="/LSC4-P.html">Tabular View</a>
-        <button id="clipboard" class="px-4 py-2 bg-blue-500 text-gray-100 rounded-md focus:outline-none">
+      <div class="col-span-full flex flex-col sm:flex-row justify-around">
+        <button id="clipboard" class="mx-2 my-2 px-4 py-2 bg-blue-500 text-gray-100 text-center rounded-md focus:outline-none">
           Copy List to Clipboard
         </button>
+        <a class="mx-2 my-2 px-4 py-2 bg-blue-500 text-gray-100 text-center rounded-md" href="/LSC4-P.html">Tabular View</a>
       </div>
       <template x-for="row in filteredRows" x-ref="row.item">
-        <div class="py-2 bg-gray-100 rounded-xl shadow-xl">
+        <div class="py-2 bg-gray-100 rounded-xl shadow-xl flex flex-col justify-between">
           <div class="flex items-center justify-between">
-            <div class="px-4">
-              <p class="font-extrabold" x-text="row.item"></p>
-              <p class="italic text-sm" x-text="row.group"></p>
+            <div class="px-4 py-2 flex items-center">
+              <img :src="iconURL(row.itemID)">
+              <div class="mx-4">
+                <p class="font-extrabold" x-text="row.item"></p>
+                <p class="italic text-sm" x-text="row.group"></p>
+              </div>
             </div>
             <div class="pr-4 flex items-center"
               :class="{'text-red-500': row.missing,

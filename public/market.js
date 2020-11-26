@@ -80,6 +80,10 @@
           }, true));
       },
 
+      iconURL(typeID) {
+        return 'https://images.evetech.net/types/' + typeID + '/icon';
+      },
+
       updateLocationHash() {
         history.pushState(null, null, '#'+this.filter);
       }
