@@ -27,13 +27,32 @@
                class="px-4 py-2 w-full bg-gray-100 focus:outline-none"
                placeholder="Type your search filter here...">
       </div>
-      <div class="col-span-full flex flex-col sm:flex-row justify-around">
-        <button id="clipboard" class="mx-2 my-2 px-4 py-2 bg-blue-500 text-gray-100 text-center rounded-md focus:outline-none">
-          Copy List to Clipboard
-        </button>
-        <a class="mx-2 my-2 px-4 py-2 bg-blue-500 text-gray-100 text-center rounded-md" href="/LSC4-P.html">Tabular View</a>
+      <div class="my-2 col-span-full flex flex-col sm:flex-row justify-between">
+        <div class="flex items-end">
+          <button id="clipboard" class="mx-2 px-4 py-2 bg-blue-500 text-gray-100 text-center rounded-md focus:outline-none">
+            Copy List to Clipboard
+          </button>
+          <a class="mx-2 px-4 py-2 bg-blue-500 text-gray-100 text-center rounded-md" href="/LSC4-P.html">Tabular View</a>
+        </div>
+        <div class="flex items-end">
+          <button class="px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-gray-400 text-gray-100 focus:outline-none"
+                  :class="{'bg-yellow-100': showLow, 'text-yellow-500': showLow}"
+                  @click="showLow = !showLow; updateStatusFilter()">
+            Low
+          </button>
+          <button class="ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-gray-400 text-gray-100 focus:outline-none"
+                  :class="{'bg-red-100': showMissing, 'text-red-500': showMissing}"
+                  @click="showMissing = !showMissing; updateStatusFilter()">
+            Missing
+          </button>
+          <button class="ml-2 px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-gray-400 text-gray-100 focus:outline-none"
+                  :class="{'bg-green-100': showStocked, 'text-green-500': showStocked}"
+                  @click="showStocked = !showStocked; updateStatusFilter()">
+            Stocked
+          </button>
+        </div>
       </div>
-      <template x-for="row in filteredRows" x-ref="row.item">
+      <template x-for="row in filteredRows" x-ref="row.itemID">
         <div class="py-2 bg-gray-100 rounded-xl shadow-xl flex flex-col justify-between">
           <div class="flex items-center justify-between">
             <div class="px-4 py-2 flex items-center">
