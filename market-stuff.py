@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from collections import namedtuple
-from xml.dom.minidom import parseString
 import collections
 import email
 import json
@@ -125,16 +124,15 @@ def useful_market_group_name(id):
         return parents[0]
 
 
-def download_data(ids, system_id):
-    base_url = 'https://api.evemarketer.com/ec/marketstat?hours=%d&usesystem=%d&' % (EVECENTRAL_HOURS, system_id)
-    suffix = "&".join("typeid=%d" % i for i in ids)
-    url = base_url + suffix
-    # evemarketer was blocking the urllib User-Agent (??), so lie
-    req = urlreq.Request(url, data=None, headers={'User-Agent': 'wtf'})
+def download_data(ids):
+    url = 'https://evepraisal.com/appraisal/structured.json?persist=no'
+    payload = ", ".join('{"type_id": %d}' % i for i in ids)
+    payload = '{"market_name": "jita", "items": [%s]}' % payload
+    req = urlreq.Request(url, data=payload.encode(), headers={'User-Agent': 'market.of-sound-mind.com', 'Content-Type': 'application/json'})
     s = urlreq.urlopen(req)
     s = "".join(x.decode() for x in s)
 
-    obj = parseString(s)
+    obj = json.loads(s)
     return obj
 
 def chunk(l, size):
@@ -148,14 +146,13 @@ def chunk(l, size):
 def read_xml_field(node, key):
     return node.getElementsByTagName(key)[0].childNodes[0].data
 
-def summarize_xml(xml):
+def summarize_json(data):
     l = []
-    items = xml.getElementsByTagName("type")
-    for item_report in items:
-        id = int(item_report.getAttribute("id"))
-        sell = item_report.getElementsByTagName("sell")[0]
-        volume = int(read_xml_field(sell, "volume"))
-        min_price = float(read_xml_field(sell, "min"))
+    items = data["appraisal"]["items"]
+    for item in items:
+        id = item["typeID"]
+        min_price = item["prices"]["sell"]["min"]
+        volume = item["prices"]["sell"]["volume"]
         l += [(id, (min_price, volume))]
     return l
 
@@ -167,6 +164,8 @@ def handle_data(target_items, hub_items):
     # fill in dummy data.
     if not hub_items:
         hub_items = [(id, (0,"?")) for (id, _) in target_items]
+    hub_items = sorted(hub_items, key=lambda i: i[0])
+    target_items = sorted(target_items, key=lambda i: i[0])
 
     for item, hub_item in zip(target_items, hub_items):
         id, (min_price, volume) = item
@@ -321,23 +320,18 @@ def make_table(formatters, system):
     item_ids = [name2item[name].id for name in item_names]
 
     esi = None
-    system_id, citadel_id = None, None
-    if '@' in system:
-        esi = esi_load.initAndAuth()
-        citadel_name, system = system.split('@')
-        name = system + " - " + citadel_name
-        citadels = esi_load.getStructures(esi, name, True)
-        citadel_id = citadels['structure'][0]
-    else:
-        name = system
-        system_id = get_system_id(system)
-    hub_system_id = get_system_id(MARKET_HUB)
+    citadel_id = None, None
+    if not '@' in system:
+        raise ValueError
+    esi = esi_load.initAndAuth()
+    citadel_name, system = system.split('@')
+    name = system + " - " + citadel_name
+    citadels = esi_load.getStructures(esi, name, True)
+    citadel_id = citadels['structure'][0]
     data = []
     hub_data = []
     for part in chunk(item_ids, CHUNK_SIZE):
-        if system_id:
-            data += summarize_xml(download_data(part, system_id))
-        hub_data += summarize_xml(download_data(part, hub_system_id))
+        hub_data += summarize_json(download_data(part))
     # if it is a citadel, get the data from there!
     if citadel_id:
         orders = esi_load.summarizeOrders(esi_load.getOrders(esi, citadel_id))
