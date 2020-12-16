@@ -80,7 +80,6 @@
 
       get filteredRows() {
         let q = this.filter.toLowerCase();
-        if (!q) return this.rows;
         let tokens = q.split(/\s+/);
         return this.rows.filter((row) => {
           let matchStatus = (
