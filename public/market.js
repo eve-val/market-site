@@ -18,11 +18,30 @@
   window.market = function() {
 
     return {
-      filter: decodeURIComponent(window.location.hash.split('#').pop()),
+      filter: '',
       text: 'Hello, LSC4-P',
       rows: [],
+      showLow: true,
+      showMissing: true,
+      showStocked: true,
 
       initialize() {
+        let hash = decodeURIComponent(window.location.hash.split('#').pop());
+        let hashParts = hash.split('&');
+        this.filter = hashParts[0];
+        if (hashParts.length > 1) {
+          this.showLow = this.showMissing = this.showStocked = false;
+          for (let i = 1; i < hashParts.length; ++i) {
+            let part = hashParts[i];
+            if ('low' === part)
+              this.showLow = true;
+            if ('missing' === part)
+              this.showMissing = true;
+            if ('stocked' === part)
+              this.showStocked = true;
+          }
+        }
+
         fetch('/LSC4-P.json')
           .then(resp => {
             if (!resp.ok) {
@@ -63,20 +82,24 @@
         let q = this.filter.toLowerCase();
         if (!q) return this.rows;
         let tokens = q.split(/\s+/);
-        return this.rows.filter((row) =>
-          tokens.reduce((isMatch, token) => {
+        return this.rows.filter((row) => {
+          let matchStatus = (
+            (this.showLow && row.stockLow) ||
+            (this.showMissing && row.missing) ||
+            (this.showStocked && row.stocked))
+
+          let matchSearch = tokens.reduce((isMatch, token) => {
             let negate = (token && token[0] === '-');
             if (negate) { token = token.substring(1); }
             if (!token) { return isMatch }
             let matched = (
-              (token === 'missing' && row.missing) ||
-              (token === 'stocked' && row.stocked) ||
-              (token === 'low' && row.stockLow) ||
               row.item.toLowerCase().includes(token) ||
               row.group.toLowerCase().includes(token));
             return isMatch && ((negate !== matched) || !token);
-              
-          }, true));
+          }, true);
+
+          return matchSearch && matchStatus;
+        });
       },
 
       fuzzworkPrice(typeID) {
@@ -88,7 +111,23 @@
       },
 
       updateLocationHash() {
-        history.pushState(null, null, '#'+this.filter);
+        let hash = '#' + this.filter;
+        if (!this.showLow || !this.showMissing || !this.showStocked) {
+          if (this.showLow)
+            hash += '&low';
+          if (this.showMissing)
+            hash += '&missing';
+          if (this.showStocked)
+            hash += '&stocked';
+        }
+        history.pushState(null, null, hash);
+      },
+
+      updateStatusFilter() {
+        if (!this.showLow && !this.showMissing && !this.showStocked) {
+            this.showLow = this.showMissing = this.showStocked = true;
+        }
+        this.updateLocationHash();
       }
     }
   }
