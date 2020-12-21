@@ -7,12 +7,12 @@
   }
 
   function stockIsLow(r) {
-    if (r.price >= 50000000) {
+    if (r.price >= 40000000) {
       return r.volume <= 2;
     } else if (r.hub_volume > 100000) {
       return r.volume < 5000;
     }
-    return r.volume < 10;
+    return r.volume < 8;
   }
 
   window.market = function() {
