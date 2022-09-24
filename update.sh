@@ -19,6 +19,6 @@ fi
 
 # Run the stuff
 echo "Running market updater" &&
-timeout 10m ./market-stuff.py "International Space Station@LSC4-P" && \
+timeout 10m ./market-stuff.py "Rens" && \
 echo "Market updater finished" && \
-cp market.css LSC4-P.html LSC4-P.json public/* /srv/of-sound-mind.com/market
+cp market.css Rens.html Rens.json public/* /srv/of-sound-mind.com/market
